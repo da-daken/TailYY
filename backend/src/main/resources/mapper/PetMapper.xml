@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tailYY.backend.mapper.PetMapper">
+
+    <resultMap id="BaseResultMap" type="com.tailYY.backend.model.Pet">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="petname" column="petName" jdbcType="VARCHAR"/>
+            <result property="classId" column="class_id" jdbcType="VARCHAR"/>
+            <result property="info" column="info" jdbcType="VARCHAR"/>
+            <result property="pic" column="pic" jdbcType="VARCHAR"/>
+            <result property="price" column="price" jdbcType="DOUBLE"/>
+            <result property="bodyRecord" column="body_record" jdbcType="VARCHAR"/>
+            <result property="serviceRecord" column="service_record" jdbcType="VARCHAR"/>
+            <result property="zoneId" column="zone_id" jdbcType="INTEGER"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+            <result property="createtime" column="createTime" jdbcType="TIMESTAMP"/>
+            <result property="updatetime" column="updateTime" jdbcType="TIMESTAMP"/>
+            <result property="isdelete" column="isDelete" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,petName,class,
+        info,pic,price,
+        body_record,service_record,zone_id,
+        status,createTime,updateTime,
+        isDelete
+    </sql>
+</mapper>

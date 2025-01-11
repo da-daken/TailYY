@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tailYY.backend.mapper.OrderInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.tailYY.backend.model.OrderInfo">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="userId" column="user_id" jdbcType="INTEGER"/>
+            <result property="goodsId" column="goods_id" jdbcType="INTEGER"/>
+            <result property="operateId" column="operate_id" jdbcType="INTEGER"/>
+            <result property="address" column="address" jdbcType="VARCHAR"/>
+            <result property="orderType" column="order_type" jdbcType="CHAR"/>
+            <result property="comments" column="comments" jdbcType="VARCHAR"/>
+            <result property="curStatus" column="cur_status" jdbcType="CHAR"/>
+            <result property="preStatus" column="pre_status" jdbcType="CHAR"/>
+            <result property="reqStatus" column="req_status" jdbcType="CHAR"/>
+            <result property="serviceTime" column="service_time" jdbcType="TIMESTAMP"/>
+            <result property="createtime" column="createTime" jdbcType="TIMESTAMP"/>
+            <result property="updatetime" column="updateTime" jdbcType="TIMESTAMP"/>
+            <result property="isdelete" column="isDelete" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,user_id,goods_id,
+        operate_id,address,order_type,
+        comments,cur_status,pre_status,
+        req_status,service_time,createTime,
+        updateTime,isDelete
+    </sql>
+</mapper>

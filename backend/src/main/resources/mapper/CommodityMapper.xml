@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tailYY.backend.mapper.CommodityMapper">
+
+    <resultMap id="BaseResultMap" type="com.tailYY.backend.model.Commodity">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="commodity" column="commodity" jdbcType="VARCHAR"/>
+            <result property="info" column="info" jdbcType="VARCHAR"/>
+            <result property="pic" column="pic" jdbcType="VARCHAR"/>
+            <result property="price" column="price" jdbcType="DOUBLE"/>
+            <result property="commodityType" column="commodity_type" jdbcType="CHAR"/>
+            <result property="classId" column="class_id" jdbcType="INTEGER"/>
+            <result property="stockCount" column="stock_count" jdbcType="INTEGER"/>
+            <result property="stockRemind" column="stock_remind" jdbcType="INTEGER"/>
+            <result property="status" column="status" jdbcType="CHAR"/>
+            <result property="comments" column="comments" jdbcType="VARCHAR"/>
+            <result property="expireTime" column="expire_time" jdbcType="TIMESTAMP"/>
+            <result property="createtime" column="createTime" jdbcType="TIMESTAMP"/>
+            <result property="updatetime" column="updateTime" jdbcType="TIMESTAMP"/>
+            <result property="isdelete" column="isDelete" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,commodity,info,
+        pic,price,commodity_type,
+        class,stock_count,stock_remind,
+        status,comments,expire_time,
+        createTime,updateTime,isDelete
+    </sql>
+</mapper>
