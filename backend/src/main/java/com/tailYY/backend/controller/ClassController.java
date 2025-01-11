@@ -6,6 +6,7 @@ import com.tailYY.backend.common.response.BaseResponse;
 import com.tailYY.backend.common.util.ResultUtils;
 import com.tailYY.backend.model.Class;
 import com.tailYY.backend.service.ClassService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping("/class")
+@Slf4j
 public class ClassController {
 
     @Resource
@@ -27,6 +29,7 @@ public class ClassController {
      */
     @GetMapping("/getClassList")
     public BaseResponse<List<Class>> getClassList(Class cl) {
+        log.info("text,{}", cl);
         QueryWrapper<Class> queryWrapper = new QueryWrapper<>(cl);
         List<Class> classList = classService.list(queryWrapper);
         return ResultUtils.success(classList);

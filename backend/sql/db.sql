@@ -34,7 +34,7 @@ create table if not exists pet
     createTime   datetime     default CURRENT_TIMESTAMP not null comment '创建时间',
     updateTime   datetime     default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
     isDelete     tinyint      default 0                 not null comment '是否删除'
-) comment '宠物';
+) character set = utf8  comment '宠物';
 
 -- 用户和宠物关系表 pet_with_user
 create table if not exists pet_with_user
@@ -44,7 +44,7 @@ create table if not exists pet_with_user
     createTime   datetime     default CURRENT_TIMESTAMP not null comment '创建时间',
     updateTime   datetime     default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
     isDelete     tinyint      default 0                 not null comment '是否删除'
-) comment '用户和宠物关系';
+) character set = utf8  comment '用户和宠物关系';
 
 -- 宠物用品 & 宠物服务表 commodity
 create table if not exists commodity
@@ -64,7 +64,7 @@ create table if not exists commodity
     createTime   datetime     default CURRENT_TIMESTAMP not null comment '创建时间',
     updateTime   datetime     default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
     isDelete     tinyint      default 0                 not null comment '是否删除'
-) comment '宠物用品 & 宠物服务';
+)  character set = utf8 comment '宠物用品 & 宠物服务';
 
 -- 类别表 class
 create table if not exists class
@@ -75,7 +75,7 @@ create table if not exists class
     createTime   datetime     default CURRENT_TIMESTAMP not null comment '创建时间',
     updateTime   datetime     default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
     isDelete     tinyint      default 0                 not null comment '是否删除'
-) comment '类别';
+) character set = utf8 comment '类别';
 
 -- 订单表 order
 create table if not exists order_info
@@ -94,4 +94,4 @@ create table if not exists order_info
     createTime   datetime     default CURRENT_TIMESTAMP not null comment '下单时间',
     updateTime   datetime     default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '修改时间',
     isDelete     tinyint      default 0                 not null comment '是否删除'
-) comment '订单';
+) character set = utf8 comment '订单';

@@ -1,4 +1,4 @@
-package com.tailYY.bootStrap;
+package com.tailYY.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
