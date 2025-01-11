@@ -11,4 +11,7 @@ import com.tailYY.backend.model.PetWithUser;
 */
 public interface PetWithUserService extends IService<PetWithUser> {
 
+    int updatePetWithUser(PetWithUser petWithUser);
+
+    PetWithUser getPetWithUser(PetWithUser petWithUser);
 }
