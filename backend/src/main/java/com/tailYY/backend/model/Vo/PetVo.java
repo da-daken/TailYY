@@ -1,7 +1,7 @@
 package com.tailYY.backend.model.Vo;
 
-import com.tailYY.backend.model.BodyRecord;
-import com.tailYY.backend.model.ServiceRecord;
+import com.tailYY.backend.model.json.BodyRecord;
+import com.tailYY.backend.model.json.ServiceRecord;
 import lombok.Data;
 
 import java.io.Serializable;

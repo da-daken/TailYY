@@ -4,6 +4,10 @@ import com.tailYY.backend.model.Class;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 /**
 * @author 28447
 * @description 针对表【class(类别)】的数据库操作Mapper
@@ -13,6 +17,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ClassMapper extends BaseMapper<Class> {
 
+    HashMap<Integer, String> selectBatchIdsMap(Set<Integer> classIds);
 }
 
 

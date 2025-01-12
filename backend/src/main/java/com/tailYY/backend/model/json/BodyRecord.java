@@ -1,4 +1,4 @@
-package com.tailYY.backend.model;
+package com.tailYY.backend.model.json;
 
 import lombok.Data;
 

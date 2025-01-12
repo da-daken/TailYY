@@ -3,6 +3,9 @@ package com.tailYY.backend.service;
 import com.tailYY.backend.model.Class;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.HashMap;
+import java.util.Set;
+
 /**
 * @author 28447
 * @description 针对表【class(类别)】的数据库操作Service
@@ -10,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface ClassService extends IService<Class> {
 
+    HashMap<Integer, String> getAllClass(Set<Integer> classIds);
 }

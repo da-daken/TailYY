@@ -2,6 +2,9 @@ package com.tailYY.backend.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.tailYY.backend.model.Commodity;
+import com.tailYY.backend.model.Vo.CommodityVo;
+
+import java.util.List;
 
 /**
 * @author 28447
@@ -10,4 +13,5 @@ import com.tailYY.backend.model.Commodity;
 */
 public interface CommodityService extends IService<Commodity> {
 
+    List<CommodityVo> getAndNotify(Commodity commodity);
 }

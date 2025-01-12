@@ -17,4 +17,11 @@
         id,class_type,class_name,
         createTime,updateTime,isDelete
     </sql>
+
+    <select id="selectBatchIdsMap" resultType="java.util.HashMap">
+        SELECT id, class_name FROM class_info WHERE id IN
+        <foreach item='id' index='index' collection='ids' open='(' separator=',' close=')'>
+            #{id}
+        </foreach>
+    </select>
 </mapper>
