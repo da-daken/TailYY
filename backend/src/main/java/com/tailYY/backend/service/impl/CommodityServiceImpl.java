@@ -4,10 +4,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import com.tailYY.backend.common.constants.CommodityConstants;
+import com.tailYY.backend.common.constants.ErrorCode;
+import com.tailYY.backend.common.exception.BusinessException;
+import com.tailYY.backend.common.request.commodity.CommentRequest;
+import com.tailYY.backend.common.request.commodity.CommodityRequest;
 import com.tailYY.backend.common.util.BeanCopyUtils;
 import com.tailYY.backend.common.util.JsonUtils;
 import com.tailYY.backend.mapper.CommodityMapper;
-import com.tailYY.backend.model.Class;
 import com.tailYY.backend.model.Commodity;
 import com.tailYY.backend.model.Vo.CommodityVo;
 import com.tailYY.backend.model.json.Comments;
@@ -35,13 +38,6 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
     public List<CommodityVo> getAndNotify(Commodity commodity) {
         QueryWrapper<Commodity> queryWrapper = new QueryWrapper<>(commodity);
         List<Commodity> commodityList = list(queryWrapper);
-        // 为每个商品设置提醒
-        // 宠物服务没有
-        for (Commodity commodity1 : commodityList) {
-            if (StringUtils.equals(commodity1.getCommodityType(), CommodityConstants.COMMODITY_GOODS) && commodity1.getStockCount() <= commodity1.getStockRemind()) {
-                // todo 用线程池发送一个提醒，这一点该怎么做？
-            }
-        }
         // 提取所有唯一类别ID
         Set<Integer> classIds = commodityList.stream()
                 .map(Commodity::getClassId)
@@ -54,8 +50,36 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
             commodityVo.setComments(JsonUtils.convertJsonList(commodity1.getComments(), Comments.class));
             // 将类别转换成名字
             commodityVo.setClassName(classMap.get(commodity1.getClassId()));
+            // 为每个商品设置提醒
+            // 宠物服务没有
+            if (StringUtils.equals(commodity1.getCommodityType(), CommodityConstants.COMMODITY_GOODS) && commodity1.getStockCount() <= commodity1.getStockRemind()) {
+                // 将库存不足提醒设为 true
+                commodityVo.setInventoryWarning(true);
+            }
             return commodityVo;
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    public Boolean addCommodity(CommodityRequest request) {
+        Commodity commodity = BeanCopyUtils.copyBean(request, Commodity.class);
+        return save(commodity);
+    }
+
+    @Override
+    public List<Comments> comments(CommentRequest request) {
+        if (request.getId() == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "商品不存在");
+        }
+        Commodity commodity = getById(request.getId());
+        if (commodity == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "商品不存在");
+        }
+        List<Comments> commentsList = JsonUtils.convertJsonList(commodity.getComments(), Comments.class);
+        commentsList.add(request.getComments());
+        commodity.setComments(JsonUtils.convertJsonString(commentsList));
+        save(commodity);
+        return commentsList;
     }
 }
 

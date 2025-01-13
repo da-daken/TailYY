@@ -1,8 +1,8 @@
 package com.tailYY.backend.controller;
 
 import com.tailYY.backend.common.constants.ErrorCode;
-import com.tailYY.backend.common.request.PetEditRequest;
-import com.tailYY.backend.common.request.PetQueryRequest;
+import com.tailYY.backend.common.request.pet.PetEditRequest;
+import com.tailYY.backend.common.request.pet.PetQueryRequest;
 import com.tailYY.backend.common.response.BaseResponse;
 import com.tailYY.backend.common.util.ResultUtils;
 import com.tailYY.backend.model.Pet;
@@ -63,7 +63,7 @@ public class PetController {
      * 删除宠物信息
      */
     @PostMapping("/deletePetInfo")
-    public BaseResponse<Boolean> deletePetInfo(@RequestBody Integer petId) {
+    public BaseResponse<Boolean> deletePetInfo(Integer petId) {
         return ResultUtils.success(petService.removeById(petId));
     }
 }

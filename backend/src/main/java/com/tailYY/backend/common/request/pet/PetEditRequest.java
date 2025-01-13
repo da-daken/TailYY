@@ -1,4 +1,4 @@
-package com.tailYY.backend.common.request;
+package com.tailYY.backend.common.request.pet;
 
 import com.tailYY.backend.model.Vo.PetVo;
 import lombok.Data;

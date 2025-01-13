@@ -1,8 +1,8 @@
 package com.tailYY.backend.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.tailYY.backend.common.request.PetEditRequest;
-import com.tailYY.backend.common.request.PetQueryRequest;
+import com.tailYY.backend.common.request.pet.PetEditRequest;
+import com.tailYY.backend.common.request.pet.PetQueryRequest;
 import com.tailYY.backend.model.Pet;
 import com.tailYY.backend.model.Vo.PetVo;
 

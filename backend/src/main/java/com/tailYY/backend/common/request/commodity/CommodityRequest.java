@@ -1,24 +1,15 @@
-package com.tailYY.backend.model.Vo;
+package com.tailYY.backend.common.request.commodity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.tailYY.backend.model.json.Comments;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
- * @author daken 2025/1/13
+ * @author daken 2025/1/14
  **/
 @Data
-public class CommodityVo implements Serializable {
-    /**
-     * id
-     */
-    @TableId(type = IdType.AUTO)
-    private Long id;
+public class CommodityRequest implements Serializable {
 
     /**
      * 商品名称
@@ -48,7 +39,7 @@ public class CommodityVo implements Serializable {
     /**
      * 商品种类id
      */
-    private String className;
+    private Integer classId;
 
     /**
      * 库存 宠物服务没有库存
@@ -63,35 +54,11 @@ public class CommodityVo implements Serializable {
     /**
      * 状态 0 正常， 1 关闭
      */
-    private String status;
-
-    /**
-     * 评价列表
-     */
-    private List<Comments> comments;
-
-    /**
-     * 库存不足提醒
-     */
-    private Boolean inventoryWarning = false;
+    private String status = "1";
 
     /**
      * 过期时间（指这个商品的售后过期时间）
      */
     private Date expireTime;
 
-    /**
-     * 创建时间
-     */
-    private Date createtime;
-
-    /**
-     * 更新时间
-     */
-    private Date updatetime;
-
-    /**
-     * 是否删除
-     */
-    private Integer isdelete;
 }

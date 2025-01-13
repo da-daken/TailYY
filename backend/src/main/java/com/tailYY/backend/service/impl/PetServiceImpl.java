@@ -3,8 +3,8 @@ package com.tailYY.backend.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
-import com.tailYY.backend.common.request.PetEditRequest;
-import com.tailYY.backend.common.request.PetQueryRequest;
+import com.tailYY.backend.common.request.pet.PetEditRequest;
+import com.tailYY.backend.common.request.pet.PetQueryRequest;
 import com.tailYY.backend.common.util.BeanCopyUtils;
 import com.tailYY.backend.common.util.JsonUtils;
 import com.tailYY.backend.mapper.PetMapper;

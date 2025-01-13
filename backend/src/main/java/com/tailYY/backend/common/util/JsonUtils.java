@@ -6,7 +6,6 @@ import com.tailYY.backend.common.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author daken 2025/1/12
@@ -22,7 +21,7 @@ public class JsonUtils {
             return JSON.parseArray(source, clazz);
         } catch (Exception e) {
             log.error("json转换list失败，入参为{}, e:{}", source, e.getMessage());
-            return null;
+            throw e;
         }
     }
 
@@ -34,7 +33,7 @@ public class JsonUtils {
             return JSON.parseObject(source, clazz);
         } catch (Exception e) {
             log.error("json转换对象失败，入参为{}, e:{}", source, e.getMessage());
-            return null;
+            throw e;
         }
     }
 
