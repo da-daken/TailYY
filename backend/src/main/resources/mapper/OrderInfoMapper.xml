@@ -8,6 +8,7 @@
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="userId" column="user_id" jdbcType="INTEGER"/>
             <result property="goodsId" column="goods_id" jdbcType="INTEGER"/>
+            <result property="classId" column="class_id" jdbcType="INTEGER"/>
             <result property="operateId" column="operate_id" jdbcType="INTEGER"/>
             <result property="address" column="address" jdbcType="VARCHAR"/>
             <result property="orderType" column="order_type" jdbcType="CHAR"/>
@@ -22,7 +23,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,user_id,goods_id,
+        id,user_id,goods_id,class_id
         operate_id,address,order_type,
         comments,cur_status,pre_status,
         req_status,service_time,createTime,

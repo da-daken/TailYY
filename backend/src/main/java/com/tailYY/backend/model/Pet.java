@@ -29,7 +29,7 @@ public class Pet implements Serializable {
     /**
      * 宠物种类
      */
-    private String classId;
+    private Integer classId;
 
     /**
      * 宠物信息

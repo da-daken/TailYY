@@ -7,7 +7,7 @@
     <resultMap id="BaseResultMap" type="com.tailYY.backend.model.Pet">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="petname" column="petName" jdbcType="VARCHAR"/>
-            <result property="classId" column="class_id" jdbcType="VARCHAR"/>
+            <result property="classId" column="class_id" jdbcType="INTEGER"/>
             <result property="info" column="info" jdbcType="VARCHAR"/>
             <result property="pic" column="pic" jdbcType="VARCHAR"/>
             <result property="price" column="price" jdbcType="DOUBLE"/>

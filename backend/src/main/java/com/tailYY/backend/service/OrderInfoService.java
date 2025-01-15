@@ -1,6 +1,7 @@
 package com.tailYY.backend.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.tailYY.backend.common.request.order.CreateOrderRequest;
 import com.tailYY.backend.model.OrderInfo;
 
 /**
@@ -10,4 +11,5 @@ import com.tailYY.backend.model.OrderInfo;
 */
 public interface OrderInfoService extends IService<OrderInfo> {
 
+    Boolean createOrder(CreateOrderRequest request);
 }

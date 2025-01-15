@@ -32,6 +32,11 @@ public class OrderInfo implements Serializable {
     private Integer goodsId;
 
     /**
+     * 类别id 0 宠物用品，1 宠物服务，2 宠物
+     */
+    private Integer classId;
+
+    /**
      * 操作者id（店员或者店长）
      */
     private Integer operateId;

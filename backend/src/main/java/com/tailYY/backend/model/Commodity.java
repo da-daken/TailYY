@@ -73,8 +73,9 @@ public class Commodity implements Serializable {
 
     /**
      * 过期时间（指这个商品的售后过期时间）
+     * 单位为小时
      */
-    private Date expireTime;
+    private Integer expireTime;
 
     /**
      * 创建时间
