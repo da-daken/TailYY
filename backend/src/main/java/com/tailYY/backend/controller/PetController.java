@@ -52,8 +52,8 @@ public class PetController {
      */
     @PostMapping("/addPetInfo")
     public BaseResponse<Boolean> addPetInfo(@RequestBody Pet pet) {
-        if (pet.getPrice() == null || pet.getZoneId() == null
-                || StringUtils.isAnyBlank(pet.getPetname(), pet.getInfo(), pet.getPic(), pet.getClassId())) {
+        if (pet.getPrice() == null || pet.getZoneId() == null || pet.getClassId() == null
+                || StringUtils.isAnyBlank(pet.getPetname(), pet.getInfo(), pet.getPic())) {
             return ResultUtils.error(ErrorCode.PARAMS_ERROR);
         }
         return ResultUtils.success(petService.save(pet));
