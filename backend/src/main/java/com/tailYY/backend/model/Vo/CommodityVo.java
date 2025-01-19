@@ -68,7 +68,7 @@ public class CommodityVo implements Serializable {
     /**
      * 评价列表
      */
-    private List<Comments> comments;
+    private List<CommentVo> comments;
 
     /**
      * 库存不足提醒

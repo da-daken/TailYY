@@ -22,8 +22,13 @@ public class ClassServiceImpl extends ServiceImpl<ClassMapper, Class> implements
     private ClassMapper classMapper;
 
     @Override
-    public HashMap<Integer, String> getAllClass(Set<Integer> classIds) {
+    public HashMap<Integer, String> getAllClassName(Set<Integer> classIds) {
         return classMapper.selectBatchIdsMap(classIds);
+    }
+
+    @Override
+    public HashMap<Integer, HashMap<String, Object>> getAllClass(Set<Integer> classIds) {
+        return classMapper.selectBatchIdsClassMap(classIds);
     }
 }
 

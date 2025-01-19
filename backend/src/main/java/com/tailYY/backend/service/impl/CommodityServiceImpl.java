@@ -12,10 +12,13 @@ import com.tailYY.backend.common.util.BeanCopyUtils;
 import com.tailYY.backend.common.util.JsonUtils;
 import com.tailYY.backend.mapper.CommodityMapper;
 import com.tailYY.backend.model.Commodity;
+import com.tailYY.backend.model.User;
+import com.tailYY.backend.model.Vo.CommentVo;
 import com.tailYY.backend.model.Vo.CommodityVo;
 import com.tailYY.backend.model.json.Comments;
 import com.tailYY.backend.service.ClassService;
 import com.tailYY.backend.service.CommodityService;
+import com.tailYY.backend.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +37,12 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
     @Resource
     private ClassService classService;
 
+    @Resource
+    private CommodityMapper commodityMapper;
+
+    @Resource
+    private UserService userService;
+
     @Override
     public List<CommodityVo> getAndNotify(Commodity commodity) {
         QueryWrapper<Commodity> queryWrapper = new QueryWrapper<>(commodity);
@@ -44,10 +53,19 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
         // 获取类别
-        HashMap<Integer, String> classMap = classService.getAllClass(classIds);
+        HashMap<Integer, String> classMap = classService.getAllClassName(classIds);
         return commodityList.stream().map(commodity1 -> {
             CommodityVo commodityVo = BeanCopyUtils.copyBean(commodity1, CommodityVo.class);
-            commodityVo.setComments(JsonUtils.convertJsonList(commodity1.getComments(), Comments.class));
+            List<Comments> commentsList = JsonUtils.convertJsonList(commodity1.getComments(), Comments.class);
+            List<CommentVo> commentVoList = commentsList.stream()
+                            .map(comments -> {
+                                CommentVo commentVo = BeanCopyUtils.copyBean(comments, CommentVo.class);
+                                User user = userService.getById(comments.getUserId());
+                                commentVo.setAvatar(user.getAvatar());
+                                commentVo.setUsername(user.getUsername());
+                                return commentVo;
+                            }).collect(Collectors.toList());
+            commodityVo.setComments(commentVoList);
             // 将类别转换成名字
             commodityVo.setClassName(classMap.get(commodity1.getClassId()));
             // 为每个商品设置提醒
@@ -76,10 +94,30 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "商品不存在");
         }
         List<Comments> commentsList = JsonUtils.convertJsonList(commodity.getComments(), Comments.class);
-        commentsList.add(request.getComments());
+        Comments comments = new Comments();
+        comments.setComment(request.getComment());
+        comments.setUserId(request.getUserId());
+        comments.setIsBuyer(false);
+        commentsList.add(comments);
         commodity.setComments(JsonUtils.convertJsonString(commentsList));
         save(commodity);
         return commentsList;
+    }
+
+    public void addOrderComments(Integer goodsId, Comments comments) {
+        Commodity commodity = getById(goodsId);
+        if (commodity == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "商品不存在");
+        }
+        List<Comments> commentsList = JsonUtils.convertJsonList(commodity.getComments(), Comments.class);
+        commentsList.add(comments);
+        commodity.setComments(JsonUtils.convertJsonString(commentsList));
+        save(commodity);
+    }
+
+    @Override
+    public Commodity getByIdLock(Integer goodsId) {
+        return commodityMapper.getByIdLock(goodsId);
     }
 }
 

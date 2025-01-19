@@ -4,6 +4,7 @@ import com.tailYY.backend.model.json.Comments;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author daken 2025/1/14
@@ -15,13 +16,11 @@ public class CommentRequest implements Serializable {
      */
     private Integer id;
 
+    private Long userId;
+    private String comment;
     /**
-     * 是否是购买后评论
+     * 评论时间
      */
-    private Boolean isBuyer;
+    private Date time = new Date();
 
-    /**
-     * 评论
-     */
-    private Comments comments;
 }

@@ -29,4 +29,7 @@
         status,comments,expire_time,
         createTime,updateTime,isDelete
     </sql>
+    <select id="getByIdLock" resultType="com.tailYY.backend.model.Commodity">
+        select * from commodity where id = #{goodsId} for update
+    </select>
 </mapper>

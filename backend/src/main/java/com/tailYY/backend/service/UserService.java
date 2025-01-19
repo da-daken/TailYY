@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.tailYY.backend.model.User;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Set;
 
 /**
 * @author 28447
@@ -25,4 +27,6 @@ public interface UserService extends IService<User> {
     User getLoginUser(HttpServletRequest request);
 
     boolean userLogout(HttpServletRequest request);
+
+    HashMap<Integer, String> getAllUserName(Set<Integer> userIds);
 }

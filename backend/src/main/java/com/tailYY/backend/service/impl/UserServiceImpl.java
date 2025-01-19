@@ -14,6 +14,8 @@ import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Set;
 
 /**
 * @author 28447
@@ -119,6 +121,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         // 移除登录态
         request.getSession().removeAttribute(USER_LOGIN_STATE);
         return true;
+    }
+
+    @Override
+    public HashMap<Integer, String> getAllUserName(Set<Integer> userIds) {
+        return userMapper.selectBatchIdsMap(userIds);
     }
 }
 

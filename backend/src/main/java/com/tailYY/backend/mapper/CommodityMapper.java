@@ -13,6 +13,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface CommodityMapper extends BaseMapper<Commodity> {
 
+    Commodity getByIdLock(Integer goodsId);
 }
 
 

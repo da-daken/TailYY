@@ -2,6 +2,7 @@ package com.tailYY.backend.mapper;
 
 import com.tailYY.backend.model.Class;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.HashMap;
@@ -17,7 +18,11 @@ import java.util.Set;
 @Mapper
 public interface ClassMapper extends BaseMapper<Class> {
 
+    @MapKey("id")
     HashMap<Integer, String> selectBatchIdsMap(Set<Integer> classIds);
+
+    @MapKey("id")
+    HashMap<Integer,HashMap<String, Object>> selectBatchIdsClassMap(Set<Integer> classIds);
 }
 
 

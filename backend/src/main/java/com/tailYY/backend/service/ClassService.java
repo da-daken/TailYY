@@ -13,5 +13,7 @@ import java.util.Set;
 */
 public interface ClassService extends IService<Class> {
 
-    HashMap<Integer, String> getAllClass(Set<Integer> classIds);
+    HashMap<Integer, String> getAllClassName(Set<Integer> classIds);
+
+    HashMap<Integer, HashMap<String, Object>> getAllClass(Set<Integer> classIds);
 }

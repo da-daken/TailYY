@@ -1,4 +1,4 @@
-package com.tailYY.backend.model.json;
+package com.tailYY.backend.model.Vo;
 
 import lombok.Data;
 
@@ -6,11 +6,16 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author daken 2025/1/13
+ * @author daken 2025/1/19
  **/
 @Data
-public class Comments implements Serializable {
-    private Long userId;
+public class CommentVo implements Serializable {
+
+    private String username;
+    /**
+     * 用户头像
+     */
+    private String avatar;
     private String comment;
     /**
      * 评论时间

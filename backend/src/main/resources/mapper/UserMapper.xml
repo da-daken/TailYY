@@ -21,4 +21,10 @@
         avatar,userRole,password,
         createTime,updateTime,isDelete
     </sql>
+    <select id="selectBatchIdsMap" resultType="java.util.HashMap">
+        SELECT id, username FROM class_info WHERE id IN
+        <foreach item='id' index='index' collection='userIds' open='(' separator=',' close=')'>
+            #{id}
+        </foreach>
+    </select>
 </mapper>

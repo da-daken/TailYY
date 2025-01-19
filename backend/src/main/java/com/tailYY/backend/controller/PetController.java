@@ -56,6 +56,7 @@ public class PetController {
                 || StringUtils.isAnyBlank(pet.getPetname(), pet.getInfo(), pet.getPic())) {
             return ResultUtils.error(ErrorCode.PARAMS_ERROR);
         }
+        pet.setStatus(0);
         return ResultUtils.success(petService.save(pet));
     }
 

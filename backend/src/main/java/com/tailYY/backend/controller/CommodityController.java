@@ -71,12 +71,6 @@ public class CommodityController {
         return ResultUtils.success(commodityService.updateById(BeanCopyUtils.copyBean(request, Commodity.class)));
     }
 
-    @PostMapping("/test")
-    public void test(@RequestBody String request) {
-        List<Comments> commentsList = JsonUtils.convertJsonList(request, Comments.class);
-        commentsList.add(new Comments());
-    }
-
     /**
      * 删除
      */

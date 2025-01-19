@@ -8,7 +8,8 @@ import java.io.Serializable;
  * @author daken 2025/1/16
  **/
 @Data
-public class CreateOrderRequest implements Serializable {
+public class CreateOfflineRequest implements Serializable {
+
     /**
      * 用户id
      */
@@ -26,6 +27,7 @@ public class CreateOrderRequest implements Serializable {
 
     /**
      * 操作者id（店员或者店长）
+     * 是线上的场景不用传
      */
     private Integer operateId;
 
@@ -35,8 +37,8 @@ public class CreateOrderRequest implements Serializable {
     private String address;
 
     /**
-     * 订单类型 0线上 1线下
+     * 订单数量
      */
-    private String orderType;
+    private Integer count;
 
 }
