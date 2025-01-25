@@ -36,3 +36,7 @@ spring:
     port: 6379
     host: localhost
     database: 0
+
+order:
+  expire:
+    minutes: 1

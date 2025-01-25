@@ -9,19 +9,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @author daken 2025/1/25
  **/
 @Configuration
-public class WebConfig {
+public class WebConfig implements WebMvcConfigurer{
 
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**") // 对所有路径生效
-                        .allowedOrigins("http://localhost") // 允许的源
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // 允许的方法
-                        .allowedHeaders("*") // 允许的头信息
-                        .allowCredentials(true); // 是否支持凭证
-            }
-        };
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        // 覆盖所有请求
+        registry.addMapping("/**")
+                // 允许发送 Cookie
+                .allowCredentials(true)
+                // 放行哪些域名（必须用 patterns，否则 * 会和 allowCredentials 冲突）
+                .allowedOriginPatterns("*")
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowedHeaders("*")
+                .exposedHeaders("*");
     }
 }

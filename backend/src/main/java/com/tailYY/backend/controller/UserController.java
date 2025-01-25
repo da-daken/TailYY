@@ -90,7 +90,7 @@ public class UserController {
      * @return
      */
     @GetMapping("/getUser")
-    public BaseResponse<List<User>> getUser(@RequestBody User user) {
+    public BaseResponse<List<User>> getUser(User user) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>(user);
         List<User> userList = userService.list(queryWrapper);
         return ResultUtils.success(userList);

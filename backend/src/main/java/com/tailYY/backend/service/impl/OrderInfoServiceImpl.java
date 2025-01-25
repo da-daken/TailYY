@@ -8,7 +8,6 @@ import com.tailYY.backend.common.constants.ErrorCode;
 import com.tailYY.backend.common.constants.GoodsEnum;
 import com.tailYY.backend.common.constants.OrderStatusEnum;
 import com.tailYY.backend.common.exception.BusinessException;
-import com.tailYY.backend.common.request.commodity.CommentRequest;
 import com.tailYY.backend.common.request.order.*;
 import com.tailYY.backend.common.util.BeanCopyUtils;
 import com.tailYY.backend.common.util.OrderGenerator;
@@ -21,8 +20,11 @@ import com.tailYY.backend.model.Vo.OrderVo;
 import com.tailYY.backend.model.json.Comments;
 import com.tailYY.backend.service.*;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,7 +54,15 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
     @Resource
     private UserService userService;
 
+    @Autowired
+    private StringRedisTemplate redisTemplate;
+
+    @Value("${order.expire.minutes}")
+    private Long expireMinutes;
+
     private static HashMap<Integer, IService> serviceMap = new HashMap<>();
+
+    private static final String ORDER_CANCEL_KEY_PREFIX = "order:cancel:";
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -65,6 +75,7 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
     }
 
     @Override
+    @Transactional
     public Long createOnlineOrder(CreateOnlineOrderRequest request) {
         OrderInfo orderInfo = BeanCopyUtils.copyBean(request, OrderInfo.class);
         // 线上
@@ -73,6 +84,7 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
     }
 
     @Override
+    @Transactional
     public Long createOfflineOrder(CreateOfflineRequest request) {
         OrderInfo orderInfo = BeanCopyUtils.copyBean(request, OrderInfo.class);
         // 线下
@@ -287,8 +299,9 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
         order.setCurStatus(OrderStatusEnum.WAIT_PAY.getCode());
 
         save(order);
-        // todo 添加一个自动取消订单 用redis实现
-
+        // 设置Redis中的键和过期时间
+        // 自动取消订单
+        redisTemplate.opsForValue().set(ORDER_CANCEL_KEY_PREFIX + orderNo, "pending", expireMinutes, java.util.concurrent.TimeUnit.SECONDS);
         return orderNo;
     }
 
@@ -317,7 +330,8 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
         order.setCurStatus(OrderStatusEnum.WAIT_SEND.getCode());
 
         save(order);
-        // todo 删除redis的定时器
+        // 删除redis的定时器
+        redisTemplate.delete(ORDER_CANCEL_KEY_PREFIX + order.getId());
         return order.getId();
     }
 }
