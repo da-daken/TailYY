@@ -54,6 +54,7 @@ public class UserController {
      * @param request
      * @return
      */
+    @CrossOrigin(origins = "*")
     @PostMapping("/login")
     public BaseResponse<User> userLogin(@RequestBody UserLoginRequest userLoginRequest, HttpServletRequest request) {
         if (userLoginRequest == null) {
