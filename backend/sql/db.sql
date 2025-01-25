@@ -16,14 +16,14 @@ create table if not exists user
     createTime   datetime     default CURRENT_TIMESTAMP not null comment '创建时间',
     updateTime   datetime     default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
     isDelete     tinyint      default 0                 not null comment '是否删除'
-) comment '用户';
+) character set = utf8 comment '用户';
 
 -- 宠物表 pet
 create table if not exists pet
 (
     id           bigint auto_increment                  comment 'id' primary key,
     petName      varchar(256)                           null comment '宠物名称',
-    class        varchar(256)                           not null comment '宠物种类',
+    class_id        varchar(256)                        not null comment '宠物种类',
     info         varchar(1024)                          null comment '宠物信息',
     pic          varchar(1024)                          not null comment '宠物照片',
     price        double                                 not null comment '价格',
@@ -55,7 +55,7 @@ create table if not exists commodity
     pic          varchar(1024)                          not null comment '宠物照片',
     price        double                                 not null comment '价格',
     commodity_type  char(1)                             not null comment '商品类型 0 宠物用品 1 宠物服务',
-    class        int                                    not null comment '商品种类id',
+    class_id        int                                    not null comment '商品种类id',
     stock_count  int                                    not null comment '库存 宠物服务没有库存',
     stock_remind int                                    comment '最低库存提醒（宠物服务没有）',
     status       char(1)                                not null comment '状态 0 正常， 1 关闭',
@@ -83,12 +83,16 @@ create table if not exists order_info
     id           bigint auto_increment                  comment '订单号' primary key,
     user_id      int                                    not null comment '用户id',
     goods_id     int                                    not null comment '商品id（宠物或者商品）',
+    class_id     int                                    not null comment '商品种类id',
+    count        int                                    not null comment '商品数量',
     operate_id   int                                    not null comment '操作者id（店员或者店长）',
+    price        double                                 not null comment '价格',
     address      varchar(255)                           not null comment '订单地址',
     order_type   char(1)                                not null comment '订单类型 0线上 1线下',
     comments     text                                   comment '订单评价(会同步到对应的商品表中)',
     cur_status   char(1)                                not null comment '当前订单状态',
     pre_status   char(1)                                comment '订单上一个状态',
+    cancelOrRefund char(1)                              comment '退货还是换货',
     req_status   char(1)                                comment '退换货状态',
     service_time datetime                               comment '售后服务截止时间',
     createTime   datetime     default CURRENT_TIMESTAMP not null comment '下单时间',
