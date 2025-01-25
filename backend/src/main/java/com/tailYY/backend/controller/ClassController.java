@@ -27,6 +27,7 @@ public class ClassController {
     /**
      * 查询类别
      */
+    @CrossOrigin(origins = "*")
     @GetMapping("/getClassList")
     public BaseResponse<List<Class>> getClassList(Class cl) {
         log.info("text,{}", cl);
