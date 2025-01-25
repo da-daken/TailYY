@@ -78,7 +78,7 @@ public class OrderController {
         if (orderId == null) {
             return ResultUtils.error(ErrorCode.PARAMS_ERROR);
         }
-        return ResultUtils.success(orderService.removeById(orderId));
+        return ResultUtils.success(orderService.cancelOrder(orderId));
     }
 
     /**

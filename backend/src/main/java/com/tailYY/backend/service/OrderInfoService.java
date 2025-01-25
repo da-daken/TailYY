@@ -32,4 +32,6 @@ public interface OrderInfoService extends IService<OrderInfo> {
     Boolean refundOrder(ApplyRequest request) throws ParseException;
 
     Boolean handleApply(ApplyRequest request);
+
+    Boolean cancelOrder(String orderId);
 }

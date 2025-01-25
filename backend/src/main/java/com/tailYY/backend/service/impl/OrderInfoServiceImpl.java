@@ -234,6 +234,20 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
         return updateById(order);
     }
 
+    @Override
+    public Boolean cancelOrder(String orderId) {
+        OrderInfo order = getById(orderId);
+        if (order == null) {
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "订单不存在");
+        }
+        if (!order.getCurStatus().equals(OrderStatusEnum.WAIT_PAY.getCode())) {
+            throw new BusinessException(ErrorCode.OPERATION_ERROR, "当前订单状态未在待支付中");
+        }
+        order.setPreStatus(order.getCurStatus());
+        order.setCurStatus(OrderStatusEnum.CANCEL.getCode());
+        return updateById(order);
+    }
+
     @Transactional
     public Long createOrder(OrderInfo order) {
         Class classDO = classService.getById(order.getClassId());
