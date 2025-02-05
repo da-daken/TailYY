@@ -8,13 +8,16 @@ import com.tailYY.backend.common.request.pet.PetQueryRequest;
 import com.tailYY.backend.common.util.BeanCopyUtils;
 import com.tailYY.backend.common.util.JsonUtils;
 import com.tailYY.backend.mapper.PetMapper;
+import com.tailYY.backend.model.Class;
 import com.tailYY.backend.model.json.BodyRecord;
 import com.tailYY.backend.model.Pet;
 import com.tailYY.backend.model.json.ServiceRecord;
 import com.tailYY.backend.model.Vo.PetVo;
+import com.tailYY.backend.service.ClassService;
 import com.tailYY.backend.service.PetService;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +28,9 @@ import java.util.stream.Collectors;
 */
 @Service
 public class PetServiceImpl extends ServiceImpl<PetMapper, Pet> implements PetService {
+
+    @Resource
+    private ClassService classService;
 
     @Override
     public Boolean editPetInfo(PetEditRequest petEditRequest) {
@@ -45,6 +51,9 @@ public class PetServiceImpl extends ServiceImpl<PetMapper, Pet> implements PetSe
             PetVo petVo = BeanCopyUtils.copyBean(pet1, PetVo.class);
             petVo.setBodyRecord(JsonUtils.convertJsonList(pet1.getBodyRecord(), BodyRecord.class));
             petVo.setServiceRecord(JsonUtils.convertJsonList(pet1.getServiceRecord(), ServiceRecord.class));
+            Class byId = classService.getById(Long.valueOf(pet1.getClassId()));
+            petVo.setClassName(byId.getClassName());
+            petVo.setType(byId.getClassType());
             return petVo;
         }).collect(Collectors.toList());
     }

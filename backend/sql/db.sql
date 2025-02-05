@@ -18,6 +18,7 @@ create table if not exists user
     isDelete     tinyint      default 0                 not null comment '是否删除'
 ) character set = utf8 comment '用户';
 
+
 -- 宠物表 pet
 create table if not exists pet
 (
@@ -35,6 +36,23 @@ create table if not exists pet
     updateTime   datetime     default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
     isDelete     tinyint      default 0                 not null comment '是否删除'
 ) character set = utf8  comment '宠物';
+
+-- 插入第一条宠物记录
+INSERT INTO pet (petName, class_id, info, pic, price, body_record, service_record, zone_id, status)
+VALUES ('小黄', '5', '一只活泼可爱的小狗', '/images/pets/dog1.jpg', 500.00, '[{"bodyStatus" : "良好","time" : "2025-01-12 00:28:46","remark" : "测试"}]', '[{"serviceName" : "洗澡","assistantName" : "2025-01-12 00:29:46","serviceTime" : "2025-01-12 00:30:46"}]', 1, 0);
+
+-- 插入第二条宠物记录
+INSERT INTO pet (petName, class_id, info, pic, price, body_record, service_record, zone_id, status)
+VALUES ('咪咪', '6', '性格温顺的一只小猫', '/images/pets/cat1.jpg', 600.00, '[{"bodyStatus" : "良好","time" : "2025-01-12 00:28:46","remark" : "测试"}]', '[{"serviceName" : "洗澡","assistantName" : "2025-01-12 00:29:46","serviceTime" : "2025-01-12 00:30:46"}]', 2, 1);
+
+# -- 插入第三条宠物记录
+# INSERT INTO pet (petName, class_id, info, pic, price, body_record, service_record, zone_id, status)
+# VALUES ('小白', '2', '非常可爱的白兔', '/images/pets/rabbit1.jpg', 200.00, '[{"bodyStatus" : "良好","time" : "2025-01-12 00:28:46","remark" : "测试"}]', '[{"serviceName" : "洗澡","assistantName" : "2025-01-12 00:29:46","serviceTime" : "2025-01-12 00:30:46"}]', 3, 0);
+#
+# -- 插入第四条宠物记录
+# INSERT INTO pet (petName, class_id, info, pic, price, body_record, service_record, zone_id, status)
+# VALUES ('彩霞', '鸟类', '羽毛色彩斑斓的鹦鹉', '/images/pets/bird1.jpg', 400.00, '[{"bodyStatus" : "良好","time" : "2025-01-12 00:28:46","remark" : "测试"}]', '[{"serviceName" : "洗澡","assistantName" : "2025-01-12 00:29:46","serviceTime" : "2025-01-12 00:30:46"}]', 4, 0);
+
 
 -- 用户和宠物关系表 pet_with_user
 create table if not exists pet_with_user
@@ -66,6 +84,13 @@ create table if not exists commodity
     isDelete     tinyint      default 0                 not null comment '是否删除'
 )  character set = utf8 comment '宠物用品 & 宠物服务';
 
+INSERT INTO commodity (commodity, info, pic, price, commodity_type, class_id, stock_count, stock_remind, status, comments)
+VALUES ('宠物玩具', '适合所有年龄段的猫狗', '/images/commodities/toy.jpg', 29.99, '0', 1, 100, 10, '0',
+        '[
+            {"userid": 1, "isBuyer": false, "comment": "我的猫很喜欢这个玩具！", "date": "2024-12-01 00:28:46"}
+        ]');
+
+
 -- 类别表 class
 create table if not exists class
 (
@@ -76,6 +101,30 @@ create table if not exists class
     updateTime   datetime     default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
     isDelete     tinyint      default 0                 not null comment '是否删除'
 ) character set = utf8 comment '类别';
+
+-- 插入第一条类别记录（宠物用品）
+INSERT INTO class (class_type, class_name)
+VALUES ('0', '狗粮');
+
+-- 插入第二条类别记录（宠物用品）
+INSERT INTO class (class_type, class_name)
+VALUES ('0', '猫砂');
+
+-- 插入第三条类别记录（宠物服务）
+INSERT INTO class (class_type, class_name)
+VALUES ('1', '宠物美容');
+
+-- 插入第四条类别记录（宠物服务）
+INSERT INTO class (class_type, class_name)
+VALUES ('1', '宠物寄养');
+
+-- 插入第五条类别记录（宠物）
+INSERT INTO class (class_type, class_name)
+VALUES ('2', '狗');
+
+-- 插入第六条类别记录（宠物）
+INSERT INTO class (class_type, class_name)
+VALUES ('2', '猫');
 
 -- 订单表 order
 create table if not exists order_info

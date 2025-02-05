@@ -8,7 +8,6 @@ import com.tailYY.backend.mapper.UserMapper;
 import com.tailYY.backend.model.User;
 import com.tailYY.backend.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
@@ -38,10 +37,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public long userRegister(String username, String password, String checkPassword) {
-        if (username.length() < 4) {
+        if (username.length() < 1) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户账号过短");
         }
-        if (password.length() < 8 || checkPassword.length() < 8) {
+        if (password.length() < 6 || checkPassword.length() < 6) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户密码过短");
         }
         // 密码和校验密码不同
@@ -73,10 +72,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public User userLogin(String username, String password, HttpServletRequest request) {
-        if (username.length() < 4) {
+        if (username.length() < 1) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "账号错误");
         }
-        if (password.length() < 8) {
+        if (password.length() < 6) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "密码错误");
         }
         // 2. 加密
