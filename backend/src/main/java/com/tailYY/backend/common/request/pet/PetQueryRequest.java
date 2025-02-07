@@ -23,17 +23,12 @@ public class PetQueryRequest implements Serializable {
     /**
      * 宠物种类
      */
-    private String classId;
+    private Long classId;
 
     /**
      * 宠物信息
      */
     private String info;
-
-    /**
-     * 宠物照片
-     */
-    private String pic;
 
     /**
      * 价格

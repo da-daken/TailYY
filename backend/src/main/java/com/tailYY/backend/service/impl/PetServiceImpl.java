@@ -39,7 +39,7 @@ public class PetServiceImpl extends ServiceImpl<PetMapper, Pet> implements PetSe
         Pet pet = BeanCopyUtils.copyBean(petEditRequest, Pet.class);
         pet.setBodyRecord(JsonUtils.convertJsonString(petEditRequest.getBodyRecord()));
         pet.setServiceRecord(JsonUtils.convertJsonString(petEditRequest.getServiceRecord()));
-        return save(pet);
+        return updateById(pet);
     }
 
     @Override
@@ -51,9 +51,8 @@ public class PetServiceImpl extends ServiceImpl<PetMapper, Pet> implements PetSe
             PetVo petVo = BeanCopyUtils.copyBean(pet1, PetVo.class);
             petVo.setBodyRecord(JsonUtils.convertJsonList(pet1.getBodyRecord(), BodyRecord.class));
             petVo.setServiceRecord(JsonUtils.convertJsonList(pet1.getServiceRecord(), ServiceRecord.class));
-            Class byId = classService.getById(Long.valueOf(pet1.getClassId()));
+            Class byId = classService.getById(pet1.getClassId());
             petVo.setClassName(byId.getClassName());
-            petVo.setType(byId.getClassType());
             return petVo;
         }).collect(Collectors.toList());
     }

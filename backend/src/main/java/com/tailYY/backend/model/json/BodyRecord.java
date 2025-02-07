@@ -10,6 +10,7 @@ import java.util.Date;
  **/
 @Data
 public class BodyRecord implements Serializable {
+    private Long bodyId;
     private String bodyStatus;
     private Date time;
     private String remark;

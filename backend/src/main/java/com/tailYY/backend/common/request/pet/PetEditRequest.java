@@ -1,6 +1,5 @@
 package com.tailYY.backend.common.request.pet;
 
-import com.tailYY.backend.model.Vo.PetVo;
 import com.tailYY.backend.model.json.BodyRecord;
 import com.tailYY.backend.model.json.ServiceRecord;
 import lombok.Data;
@@ -27,12 +26,7 @@ public class PetEditRequest implements Serializable {
     /**
      * 宠物种类
      */
-    private Integer classId;
-
-    /**
-     * 宠物type 类型 0 宠物用品，1 宠物服务，2 宠物
-     */
-    private String type;
+    private Long classId;
 
     /**
      * 宠物信息

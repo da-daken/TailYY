@@ -31,7 +31,7 @@ public class Pet implements Serializable {
     /**
      * 宠物种类
      */
-    private Integer classId;
+    private Long classId;
 
     /**
      * 宠物信息

@@ -99,16 +99,16 @@ public class UserController {
     /**
      * 删除用户
      *
-     * @param deleteRequest
+     * @param userid
      * @param request
      * @return
      */
     @PostMapping("/delete")
-    public BaseResponse<Boolean> deleteUser(@RequestBody User deleteRequest, HttpServletRequest request) {
-        if (deleteRequest == null || deleteRequest.getId() <= 0) {
+    public BaseResponse<Boolean> deleteUser(@RequestBody Long userid, HttpServletRequest request) {
+        if (userid == null || userid <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        boolean b = userService.removeById(deleteRequest.getId());
+        boolean b = userService.removeById(userid);
         return ResultUtils.success(b);
     }
 

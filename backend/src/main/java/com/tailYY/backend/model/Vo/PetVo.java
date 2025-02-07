@@ -5,6 +5,7 @@ import com.tailYY.backend.model.json.ServiceRecord;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,11 +30,6 @@ public class PetVo implements Serializable {
     private String className;
 
     /**
-     * 宠物type 类型 0 宠物用品，1 宠物服务，2 宠物
-     */
-    private String type;
-
-    /**
      * 宠物信息
      */
     private String info;
@@ -51,12 +47,12 @@ public class PetVo implements Serializable {
     /**
      * 健康状态记录
      */
-    private List<BodyRecord> bodyRecord;
+    private List<BodyRecord> bodyRecord = new ArrayList<>();
 
     /**
      * 服务记录
      */
-    private List<ServiceRecord> serviceRecord;
+    private List<ServiceRecord> serviceRecord = new ArrayList<>();
 
     /**
      * 笼子号

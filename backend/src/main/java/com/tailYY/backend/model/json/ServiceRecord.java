@@ -10,6 +10,7 @@ import java.util.Date;
  **/
 @Data
 public class ServiceRecord implements Serializable {
+    private Long serviceId;
     private String serviceName;
     private String assistantName;
     private Date serviceTime;
