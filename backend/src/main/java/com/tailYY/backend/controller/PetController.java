@@ -38,7 +38,7 @@ public class PetController {
     @PostMapping("/updatePetInfo")
     public BaseResponse<Boolean> updatePetInfo(@RequestBody PetEditRequest petEditRequest) {
         if (petEditRequest.getId() == null ||  petEditRequest.getPrice() == null || petEditRequest.getZoneId() == null
-                || StringUtils.isAnyBlank(petEditRequest.getPetname(), petEditRequest.getInfo(), petEditRequest.getPic(), petEditRequest.getClassId())) {
+                || StringUtils.isAnyBlank(petEditRequest.getPetname(), petEditRequest.getInfo(), petEditRequest.getPic())) {
             return ResultUtils.error(ErrorCode.PARAMS_ERROR);
         }
         if (petEditRequest.getIsdelete() == 1) {
