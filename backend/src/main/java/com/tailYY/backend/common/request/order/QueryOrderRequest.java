@@ -26,7 +26,7 @@ public class QueryOrderRequest implements Serializable {
     private Integer goodsId;
 
     /**
-     * 类别id 0 宠物用品，1 宠物服务，2 宠物
+     * 类别id
      */
     private Integer classId;
 
@@ -49,6 +49,11 @@ public class QueryOrderRequest implements Serializable {
      * 退换货状态
      */
     private String reqStatus;
+
+    /**
+     * 订单数量
+     */
+    private Integer count;
 
     /**
      * 下单时间

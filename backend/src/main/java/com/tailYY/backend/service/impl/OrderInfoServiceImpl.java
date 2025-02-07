@@ -125,6 +125,7 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
                 .map(orderInfo -> {
                     OrderVo orderVo = BeanCopyUtils.copyBean(orderInfo, OrderVo.class);
                     orderVo.setClassName(String.valueOf(classMap.get(orderInfo.getClassId()).get("className")));
+                    orderVo.setClassType(String.valueOf(classMap.get(orderInfo.getClassId()).get("classType")));
                     orderVo.setUsername(String.valueOf(userIdMap.get(orderInfo.getUserId())));
                     orderVo.setOperateName(String.valueOf(userIdMap.get(orderInfo.getOperateId())));
                     if (classMap.get(orderInfo.getClassId()).get("classType") == GoodsEnum.PET.getCode()) {
@@ -310,7 +311,7 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
      * @return 订单号
      */
     @Override
-    public Long payOrder(PayOrderRequest request) {
+    public Boolean payOrder(PayOrderRequest request) {
         OrderInfo order = getById(request.getId());
         if (order == null) {
             throw new BusinessException(ErrorCode.SYSTEM_ERROR, "订单不存在");
@@ -329,10 +330,10 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
         order.setPreStatus(order.getCurStatus());
         order.setCurStatus(OrderStatusEnum.WAIT_SEND.getCode());
 
-        save(order);
+        boolean save = save(order);
         // 删除redis的定时器
         redisTemplate.delete(ORDER_CANCEL_KEY_PREFIX + order.getId());
-        return order.getId();
+        return save;
     }
 }
 

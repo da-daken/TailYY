@@ -53,7 +53,7 @@ public class CommodityController {
      * 评论商品
      */
     @PostMapping("/comment")
-    public BaseResponse<List<Comments>> comment(@RequestBody CommentRequest request) {
+    public BaseResponse<Boolean> comment(@RequestBody CommentRequest request) {
         if (request == null) {
             return ResultUtils.error(ErrorCode.PARAMS_ERROR);
         }
@@ -61,7 +61,7 @@ public class CommodityController {
     }
 
     /**
-     * 编辑宠物
+     * 编辑商品
      */
     @PostMapping("/editCommodity")
     public BaseResponse<Boolean> updateCommodity(@RequestBody CommodityRequest request) {
@@ -75,7 +75,7 @@ public class CommodityController {
      * 删除
      */
     @PostMapping("/deleteCommodity")
-    public BaseResponse<Boolean> deleteCommodity(@RequestBody Commodity request) {
+    public BaseResponse<Boolean> deleteCommodity(@RequestBody Long request) {
         if (request == null) {
             return ResultUtils.error(ErrorCode.PARAMS_ERROR);
         }

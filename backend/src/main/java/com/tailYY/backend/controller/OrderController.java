@@ -60,7 +60,7 @@ public class OrderController {
      * 支付订单
      */
     @PostMapping("/payOrder")
-    public BaseResponse<Long> payOrder(@RequestBody PayOrderRequest request) {
+    public BaseResponse<Boolean> payOrder(@RequestBody PayOrderRequest request) {
         if (request == null) {
             return ResultUtils.error(ErrorCode.PARAMS_ERROR);
         }
@@ -117,7 +117,7 @@ public class OrderController {
     /**
      * 评价订单
      */
-    @PostMapping("/commitOrder")
+    @PostMapping("/commentOrder")
     public BaseResponse<Boolean> commitOrder(@RequestBody CommitOrderRequest request) {
         if (request == null) {
             return ResultUtils.error(ErrorCode.PARAMS_ERROR);

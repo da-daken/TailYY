@@ -26,9 +26,14 @@ public class OrderVo implements Serializable {
     private String goodsName;
 
     /**
-     * 类别id 0 宠物用品，1 宠物服务，2 宠物
+     * 类别名称
      */
     private String className;
+
+    /**
+     * 类别type 0 宠物用品，1 宠物服务，2 宠物
+     */
+    private String classType;
 
     /**
      * 操作者name（店员或者店长）
@@ -64,11 +69,6 @@ public class OrderVo implements Serializable {
      * 当前订单状态
      */
     private String curStatus;
-
-    /**
-     * 订单上一个状态
-     */
-    private String preStatus;
 
     /**
      * 退换货状态

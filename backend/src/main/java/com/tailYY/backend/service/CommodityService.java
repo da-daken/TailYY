@@ -20,7 +20,7 @@ public interface CommodityService extends IService<Commodity> {
 
     Boolean addCommodity(CommodityRequest request);
 
-    List<Comments> comments(CommentRequest request);
+    Boolean comments(CommentRequest request);
 
     void addOrderComments(Integer goodsId, Comments comments);
 

@@ -39,11 +39,11 @@ public class ClassController {
      * 删除类别
      */
     @PostMapping("/deleteClass")
-    public BaseResponse<Boolean> deleteClass(@RequestBody Class cl) {
-        if (cl == null || cl.getId() == null) {
+    public BaseResponse<Boolean> deleteClass(@RequestBody Long classId) {
+        if (classId == null || classId == null) {
             return ResultUtils.error(ErrorCode.PARAMS_ERROR);
         }
-        return ResultUtils.success(classService.removeById(cl));
+        return ResultUtils.success(classService.removeById(classId));
     }
 
     /**
@@ -60,7 +60,7 @@ public class ClassController {
     /**
      * 编辑类别
      */
-    @PostMapping("/updateClass")
+    @PostMapping("/editClass")
     public BaseResponse<Boolean> updateClass(@RequestBody Class cl) {
         if (cl.getId() == null || StringUtils.isAnyBlank(cl.getClassName(), cl.getClassType())) {
             return ResultUtils.error(ErrorCode.PARAMS_ERROR);

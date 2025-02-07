@@ -11,6 +11,8 @@ import java.util.Date;
 @Data
 public class CommodityRequest implements Serializable {
 
+    private Long id;
+
     /**
      * 商品名称
      */

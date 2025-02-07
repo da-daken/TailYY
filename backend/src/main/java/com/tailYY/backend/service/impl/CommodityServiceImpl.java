@@ -85,7 +85,7 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
     }
 
     @Override
-    public List<Comments> comments(CommentRequest request) {
+    public Boolean comments(CommentRequest request) {
         if (request.getId() == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "商品不存在");
         }
@@ -100,8 +100,7 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
         comments.setIsBuyer(false);
         commentsList.add(comments);
         commodity.setComments(JsonUtils.convertJsonString(commentsList));
-        save(commodity);
-        return commentsList;
+        return save(commodity);
     }
 
     public void addOrderComments(Integer goodsId, Comments comments) {

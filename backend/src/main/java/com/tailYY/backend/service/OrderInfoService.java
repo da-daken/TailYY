@@ -15,7 +15,7 @@ import java.util.List;
 */
 public interface OrderInfoService extends IService<OrderInfo> {
 
-    Long payOrder(PayOrderRequest request);
+    Boolean payOrder(PayOrderRequest request);
 
     Long createOnlineOrder(CreateOnlineOrderRequest request);
 
