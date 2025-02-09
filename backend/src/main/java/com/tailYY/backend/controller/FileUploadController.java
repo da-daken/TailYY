@@ -21,10 +21,10 @@ import java.nio.file.Paths;
  **/
 @RestController
 public class FileUploadController {
-    private static final String UPLOAD_DIR = "backend/photos";
+    private static final String UPLOAD_DIR = "backend/photos/";
 
     @PostMapping("/uploadPhoto")
-    public BaseResponse<Boolean> uploadPhoto(@RequestParam("photo") MultipartFile file) {
+    public BaseResponse<String> uploadPhoto(@RequestParam("photo") MultipartFile file) {
         if (file.isEmpty()) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
@@ -43,12 +43,12 @@ public class FileUploadController {
             // 将文件保存到指定位置
             Files.copy(file.getInputStream(), path);
 
-            return ResultUtils.success(true);
+            return ResultUtils.success(UPLOAD_DIR + fileName);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return ResultUtils.success(false);
+        return ResultUtils.success("上传失败");
     }
 
     @GetMapping("/test")
