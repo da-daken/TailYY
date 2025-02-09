@@ -24,11 +24,11 @@ public class OrderCancelListener {
             String orderId = message.substring(ORDER_CANCEL_KEY_PREFIX.length());
             log.info("收到订单信息 {} 执行取消操作", orderId);
             // 在这里执行取消订单的业务逻辑
-            cancelOrder(orderId);
+            cancelOrder(Long.valueOf(orderId));
         }
     }
 
-    private void cancelOrder(String orderId) {
+    private void cancelOrder(Long orderId) {
         // 实现具体的取消订单逻辑
         orderService.cancelOrder(orderId);
     }

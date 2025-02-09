@@ -33,5 +33,5 @@ public interface OrderInfoService extends IService<OrderInfo> {
 
     Boolean handleApply(ApplyRequest request);
 
-    Boolean cancelOrder(String orderId);
+    Boolean cancelOrder(Long orderId);
 }

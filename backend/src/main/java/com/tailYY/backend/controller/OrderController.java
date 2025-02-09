@@ -4,6 +4,7 @@ import com.tailYY.backend.common.constants.ErrorCode;
 import com.tailYY.backend.common.request.order.*;
 import com.tailYY.backend.common.response.BaseResponse;
 import com.tailYY.backend.common.util.ResultUtils;
+import com.tailYY.backend.model.OrderInfo;
 import com.tailYY.backend.model.Vo.OrderVo;
 import com.tailYY.backend.service.OrderInfoService;
 import org.springframework.util.Assert;
@@ -74,11 +75,11 @@ public class OrderController {
      * 取消订单
      */
     @PostMapping("/cancelOrder")
-    public BaseResponse<Boolean> cancelOrder(@RequestBody String orderId) {
+    public BaseResponse<Boolean> cancelOrder(@RequestBody OrderInfo orderId) {
         if (orderId == null) {
             return ResultUtils.error(ErrorCode.PARAMS_ERROR);
         }
-        return ResultUtils.success(orderService.cancelOrder(orderId));
+        return ResultUtils.success(orderService.cancelOrder(orderId.getId()));
     }
 
     /**
@@ -96,22 +97,22 @@ public class OrderController {
      * 订单发货
      */
     @PostMapping("/sendOrder")
-    public BaseResponse<Boolean> sendOrder(@RequestBody Long orderId) {
+    public BaseResponse<Boolean> sendOrder(@RequestBody OrderInfo orderId) {
         if (orderId == null) {
             return ResultUtils.error(ErrorCode.PARAMS_ERROR);
         }
-        return ResultUtils.success(orderService.sendOrder(orderId));
+        return ResultUtils.success(orderService.sendOrder(orderId.getId()));
     }
 
     /**
      * 订单签收
      */
     @PostMapping("/signOrder")
-    public BaseResponse<Boolean> signOrder(@RequestBody Long orderId) {
+    public BaseResponse<Boolean> signOrder(@RequestBody OrderInfo orderId) {
         if (orderId == null) {
             return ResultUtils.error(ErrorCode.PARAMS_ERROR);
         }
-        return ResultUtils.success(orderService.signOrder(orderId));
+        return ResultUtils.success(orderService.signOrder(orderId.getId()));
     }
 
     /**

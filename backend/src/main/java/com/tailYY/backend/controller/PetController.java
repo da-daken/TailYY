@@ -133,7 +133,7 @@ public class PetController {
      * 删除宠物信息
      */
     @PostMapping("/deletePetInfo")
-    public BaseResponse<Boolean> deletePetInfo(@RequestBody Long petId) {
-        return ResultUtils.success(petService.removeById(petId));
+    public BaseResponse<Boolean> deletePetInfo(@RequestBody Pet petId) {
+        return ResultUtils.success(petService.removeById(petId.getId()));
     }
 }

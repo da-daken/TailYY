@@ -104,11 +104,11 @@ public class UserController {
      * @return
      */
     @PostMapping("/delete")
-    public BaseResponse<Boolean> deleteUser(@RequestBody Long userid, HttpServletRequest request) {
-        if (userid == null || userid <= 0) {
+    public BaseResponse<Boolean> deleteUser(@RequestBody User userid, HttpServletRequest request) {
+        if (userid == null || userid.getId() <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        boolean b = userService.removeById(userid);
+        boolean b = userService.removeById(userid.getId());
         return ResultUtils.success(b);
     }
 

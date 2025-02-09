@@ -39,11 +39,11 @@ public class ClassController {
      * 删除类别
      */
     @PostMapping("/deleteClass")
-    public BaseResponse<Boolean> deleteClass(@RequestBody Long classId) {
+    public BaseResponse<Boolean> deleteClass(@RequestBody Class classId) {
         if (classId == null || classId == null) {
             return ResultUtils.error(ErrorCode.PARAMS_ERROR);
         }
-        return ResultUtils.success(classService.removeById(classId));
+        return ResultUtils.success(classService.removeById(classId.getId()));
     }
 
     /**

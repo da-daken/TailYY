@@ -248,7 +248,7 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
     }
 
     @Override
-    public Boolean cancelOrder(String orderId) {
+    public Boolean cancelOrder(Long orderId) {
         OrderInfo order = getById(orderId);
         if (order == null) {
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "订单不存在");

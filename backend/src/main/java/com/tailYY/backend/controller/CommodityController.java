@@ -75,10 +75,10 @@ public class CommodityController {
      * 删除
      */
     @PostMapping("/deleteCommodity")
-    public BaseResponse<Boolean> deleteCommodity(@RequestBody Long request) {
+    public BaseResponse<Boolean> deleteCommodity(@RequestBody Commodity request) {
         if (request == null) {
             return ResultUtils.error(ErrorCode.PARAMS_ERROR);
         }
-        return ResultUtils.success(commodityService.removeById(request));
+        return ResultUtils.success(commodityService.removeById(request.getId()));
     }
 }
