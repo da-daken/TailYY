@@ -65,9 +65,6 @@ public class ClassController {
         if (cl.getId() == null || StringUtils.isAnyBlank(cl.getClassName(), cl.getClassType())) {
             return ResultUtils.error(ErrorCode.PARAMS_ERROR);
         }
-        if (cl.getIsdelete() == 1) {
-            return ResultUtils.error(ErrorCode.OPERATION_ERROR, "请检查类别的状态");
-        }
         return ResultUtils.success(classService.updateById(cl));
     }
 }
