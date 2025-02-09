@@ -16,6 +16,10 @@ server:
       # Tomcat启动初始化的线程数，默认值10
       min-spare: 100080
 spring:
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
   application:
     name: api-backend
   # DataSource Config
