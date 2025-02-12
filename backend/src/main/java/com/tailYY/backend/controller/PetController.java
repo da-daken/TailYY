@@ -44,9 +44,6 @@ public class PetController {
                 || StringUtils.isAnyBlank(petEditRequest.getPetname(), petEditRequest.getInfo(), petEditRequest.getPic())) {
             return ResultUtils.error(ErrorCode.PARAMS_ERROR);
         }
-        if (petEditRequest.getIsdelete() == 1) {
-            return ResultUtils.error(ErrorCode.OPERATION_ERROR, "请检查宠物信息是否被删除");
-        }
         return ResultUtils.success(petService.editPetInfo(petEditRequest));
     }
 
