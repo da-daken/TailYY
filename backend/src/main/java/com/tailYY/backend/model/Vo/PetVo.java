@@ -25,6 +25,11 @@ public class PetVo implements Serializable {
     private String petname;
 
     /**
+     * 类别id
+     */
+    private Long classId;
+
+    /**
      * 宠物种类
      */
     private String className;

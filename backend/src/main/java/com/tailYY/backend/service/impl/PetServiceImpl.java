@@ -52,6 +52,7 @@ public class PetServiceImpl extends ServiceImpl<PetMapper, Pet> implements PetSe
             petVo.setBodyRecord(JsonUtils.convertJsonList(pet1.getBodyRecord(), BodyRecord.class));
             petVo.setServiceRecord(JsonUtils.convertJsonList(pet1.getServiceRecord(), ServiceRecord.class));
             Class byId = classService.getById(pet1.getClassId());
+            petVo.setClassId(pet1.getClassId());
             petVo.setClassName(byId.getClassName());
             return petVo;
         }).collect(Collectors.toList());
