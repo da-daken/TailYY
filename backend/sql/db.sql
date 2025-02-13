@@ -148,3 +148,7 @@ create table if not exists order_info
     updateTime   datetime     default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '修改时间',
     isDelete     tinyint      default 0                 not null comment '是否删除'
 ) character set = utf8 comment '订单';
+
+-- 插入第一条订单记录
+INSERT INTO order_info (user_id, goods_id, class_id, count, operate_id, price, address, order_type, cur_status)
+VALUES (1, 101, 1, 1, 1, 29.99, '上海市浦东新区陆家嘴环路1000号', '0', '0 ');

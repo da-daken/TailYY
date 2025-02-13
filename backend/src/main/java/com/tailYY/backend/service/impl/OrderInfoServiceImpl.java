@@ -103,7 +103,14 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
         // 获取类别
-        HashMap<Integer, HashMap<String, Object>> classMap = classService.getAllClass(classIds);
+        List<Class> classList = classService.getAllClass(classIds);
+        HashMap<Long, HashMap<String, String>> classMap = new HashMap<>();
+        for (Class aClass : classList) {
+            HashMap<String, String> stringStringHashMap = new HashMap<>();
+            stringStringHashMap.put("className", aClass.getClassName());
+            stringStringHashMap.put("classType", aClass.getClassType());
+            classMap.put(aClass.getId(), stringStringHashMap);
+        }
 
         // 提取所有userId
         Set<Integer> userIds = orderInfos.stream()

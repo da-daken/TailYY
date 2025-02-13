@@ -61,6 +61,6 @@ public class CommodityRequest implements Serializable {
     /**
      * 过期时间（指这个商品的售后过期时间）
      */
-    private Date expireTime;
+    private Date expireTime = new Date();
 
 }

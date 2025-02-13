@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -22,12 +23,12 @@ public class ClassServiceImpl extends ServiceImpl<ClassMapper, Class> implements
     private ClassMapper classMapper;
 
     @Override
-    public HashMap<Integer, String> getAllClassName(Set<Integer> classIds) {
+    public HashMap<Long, String> getAllClassName(Set<Integer> classIds) {
         return classMapper.selectBatchIdsMap(classIds);
     }
 
     @Override
-    public HashMap<Integer, HashMap<String, Object>> getAllClass(Set<Integer> classIds) {
+    public List<Class> getAllClass(Set<Integer> classIds) {
         return classMapper.selectBatchIdsClassMap(classIds);
     }
 }

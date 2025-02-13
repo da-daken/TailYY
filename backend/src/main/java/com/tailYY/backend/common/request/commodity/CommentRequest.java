@@ -1,6 +1,5 @@
 package com.tailYY.backend.common.request.commodity;
 
-import com.tailYY.backend.model.json.Comments;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -14,7 +13,7 @@ public class CommentRequest implements Serializable {
     /**
      * 商品id
      */
-    private Integer id;
+    private Long id;
 
     private Long userId;
     private String comment;

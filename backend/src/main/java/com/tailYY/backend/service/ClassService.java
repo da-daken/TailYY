@@ -4,6 +4,7 @@ import com.tailYY.backend.model.Class;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Set;
 */
 public interface ClassService extends IService<Class> {
 
-    HashMap<Integer, String> getAllClassName(Set<Integer> classIds);
+    HashMap<Long, String> getAllClassName(Set<Integer> classIds);
 
-    HashMap<Integer, HashMap<String, Object>> getAllClass(Set<Integer> classIds);
+    List<Class> getAllClass(Set<Integer> classIds);
 }

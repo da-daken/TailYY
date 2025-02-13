@@ -11,6 +11,7 @@ import com.tailYY.backend.common.request.commodity.CommodityRequest;
 import com.tailYY.backend.common.util.BeanCopyUtils;
 import com.tailYY.backend.common.util.JsonUtils;
 import com.tailYY.backend.mapper.CommodityMapper;
+import com.tailYY.backend.model.Class;
 import com.tailYY.backend.model.Commodity;
 import com.tailYY.backend.model.User;
 import com.tailYY.backend.model.Vo.CommentVo;
@@ -53,21 +54,32 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
         // 获取类别
-        HashMap<Integer, String> classMap = classService.getAllClassName(classIds);
+        List<Class> classList = classService.getAllClass(classIds);
+        HashMap<Long, HashMap<String, String>> classMap = new HashMap<>();
+        for (Class aClass : classList) {
+            HashMap<String, String> stringStringHashMap = new HashMap<>();
+            stringStringHashMap.put("className", aClass.getClassName());
+            stringStringHashMap.put("classType", aClass.getClassType());
+            classMap.put(aClass.getId(), stringStringHashMap);
+        }
         return commodityList.stream().map(commodity1 -> {
             CommodityVo commodityVo = BeanCopyUtils.copyBean(commodity1, CommodityVo.class);
             List<Comments> commentsList = JsonUtils.convertJsonList(commodity1.getComments(), Comments.class);
-            List<CommentVo> commentVoList = commentsList.stream()
-                            .map(comments -> {
-                                CommentVo commentVo = BeanCopyUtils.copyBean(comments, CommentVo.class);
-                                User user = userService.getById(comments.getUserId());
-                                commentVo.setAvatar(user.getAvatar());
-                                commentVo.setUsername(user.getUsername());
-                                return commentVo;
-                            }).collect(Collectors.toList());
-            commodityVo.setComments(commentVoList);
+            if (commentsList !=null && !commentsList.isEmpty()) {
+                List<CommentVo> commentVoList = commentsList.stream()
+                        .map(comments -> {
+                            CommentVo commentVo = BeanCopyUtils.copyBean(comments, CommentVo.class);
+                            User user = userService.getById(comments.getUserId());
+                            commentVo.setAvatar(user.getAvatar());
+                            commentVo.setUsername(user.getUsername());
+                            return commentVo;
+                        }).collect(Collectors.toList());
+                commodityVo.setComments(commentVoList);
+            }
             // 将类别转换成名字
-            commodityVo.setClassName(classMap.get(commodity1.getClassId()));
+            commodityVo.setClassId(Long.valueOf(commodity1.getClassId()));
+            commodityVo.setClassName(classMap.get(Long.valueOf(commodity1.getClassId())).get("className"));
+            commodityVo.setCommodityType(classMap.get(Long.valueOf(commodity1.getClassId())).get("classType"));
             // 为每个商品设置提醒
             // 宠物服务没有
             if (StringUtils.equals(commodity1.getCommodityType(), CommodityConstants.COMMODITY_GOODS) && commodity1.getStockCount() <= commodity1.getStockRemind()) {

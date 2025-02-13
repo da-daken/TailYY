@@ -41,6 +41,11 @@ public class CommodityVo implements Serializable {
     private Double price;
 
     /**
+     * 类别id
+     */
+    private Long classId;
+
+    /**
      * 商品类型 0 宠物用品 1 宠物服务
      */
     private String commodityType;
