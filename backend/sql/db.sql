@@ -78,7 +78,7 @@ create table if not exists commodity
     stock_remind int                                    comment '最低库存提醒（宠物服务没有）',
     status       char(1)                                not null comment '状态 0 正常， 1 关闭',
     comments     text                                   comment '评价列表',
-    expire_time  datetime                               comment '过期时间（指这个商品的售后过期时间）',
+    expire_time  int                               comment '过期时间（指这个商品的售后过期时间）',
     createTime   datetime     default CURRENT_TIMESTAMP not null comment '创建时间',
     updateTime   datetime     default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
     isDelete     tinyint      default 0                 not null comment '是否删除'
