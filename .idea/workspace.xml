@@ -5,19 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="de55ea84-218f-41bd-a6b9-d18ee52356ac" name="Changes" comment="fix">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e4f3e179-3b4f-4158-94a1-787f86b3ca82.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/e4f3e179-3b4f-4158-94a1-787f86b3ca82.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/sql/db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/sql/db.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/tailYY/backend/common/request/commodity/CommentRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/tailYY/backend/common/request/commodity/CommentRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/tailYY/backend/common/request/commodity/CommodityRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/tailYY/backend/common/request/commodity/CommodityRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/tailYY/backend/mapper/ClassMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/tailYY/backend/mapper/ClassMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/tailYY/backend/model/Vo/CommodityVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/tailYY/backend/model/Vo/CommodityVo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/tailYY/backend/service/ClassService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/tailYY/backend/service/ClassService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/tailYY/backend/service/impl/ClassServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/tailYY/backend/service/impl/ClassServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/tailYY/backend/service/impl/CommodityServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/tailYY/backend/service/impl/CommodityServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/tailYY/backend/service/impl/OrderInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/tailYY/backend/service/impl/OrderInfoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/mapper/ClassMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/mapper/ClassMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,7 +146,8 @@
       <workItem from="1737223382380" duration="13471000" />
       <workItem from="1737381034209" duration="12750000" />
       <workItem from="1738756472548" duration="31337000" />
-      <workItem from="1739450381201" duration="1243000" />
+      <workItem from="1739450381201" duration="5970000" />
+      <workItem from="1739607657361" duration="544000" />
     </task>
     <task id="LOCAL-00001" summary="add 用户、宠物与用户关系、类别处理">
       <option name="closed" value="true" />
@@ -366,7 +357,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739374718135</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="fix">
+      <option name="closed" value="true" />
+      <created>1739454399841</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1739454399841</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -423,6 +422,11 @@
           <url>file://$PROJECT_DIR$/backend/src/main/java/com/tailYY/backend/service/impl/CommodityServiceImpl.java</url>
           <line>79</line>
           <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/src/main/java/com/tailYY/backend/service/impl/CommodityServiceImpl.java</url>
+          <line>72</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

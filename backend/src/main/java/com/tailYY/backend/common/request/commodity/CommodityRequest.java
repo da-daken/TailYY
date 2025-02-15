@@ -34,11 +34,6 @@ public class CommodityRequest implements Serializable {
     private Double price;
 
     /**
-     * 商品类型 0 宠物用品 1 宠物服务
-     */
-    private String commodityType;
-
-    /**
      * 商品种类id
      */
     private Integer classId;

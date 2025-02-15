@@ -93,6 +93,8 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
     @Override
     public Boolean addCommodity(CommodityRequest request) {
         Commodity commodity = BeanCopyUtils.copyBean(request, Commodity.class);
+        Class classServiceById = classService.getById(Long.valueOf(request.getClassId()));
+        commodity.setCommodityType(classServiceById.getClassType());
         return save(commodity);
     }
 
