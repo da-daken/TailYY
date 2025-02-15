@@ -48,6 +48,9 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
     public List<CommodityVo> getAndNotify(Commodity commodity) {
         QueryWrapper<Commodity> queryWrapper = new QueryWrapper<>(commodity);
         List<Commodity> commodityList = list(queryWrapper);
+        if (commodityList.size() == 0) {
+            return Collections.emptyList();
+        }
         // 提取所有唯一类别ID
         Set<Integer> classIds = commodityList.stream()
                 .map(Commodity::getClassId)
