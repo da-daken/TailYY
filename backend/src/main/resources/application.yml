@@ -43,4 +43,4 @@ spring:
 
 order:
   expire:
-    minutes: 60
+    minutes: 300
