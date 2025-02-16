@@ -97,6 +97,9 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
         OrderInfo order = BeanCopyUtils.copyBean(request, OrderInfo.class);
         QueryWrapper<OrderInfo> queryWrapper = new QueryWrapper<>(order);
         List<OrderInfo> orderInfos = list(queryWrapper);
+        if (orderInfos.isEmpty()) {
+            return Collections.emptyList();
+        }
         // 提取所有唯一类别ID
         Set<Integer> classIds = orderInfos.stream()
                 .map(OrderInfo::getClassId)
@@ -131,18 +134,18 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
         List<OrderVo> orderVoList = orderInfos.stream()
                 .map(orderInfo -> {
                     OrderVo orderVo = BeanCopyUtils.copyBean(orderInfo, OrderVo.class);
-                    orderVo.setClassName(String.valueOf(classMap.get(orderInfo.getClassId()).get("className")));
-                    orderVo.setClassType(String.valueOf(classMap.get(orderInfo.getClassId()).get("classType")));
+                    orderVo.setClassName(String.valueOf(classMap.get(Long.valueOf(orderInfo.getClassId())).get("className")));
+                    orderVo.setClassType(String.valueOf(classMap.get(Long.valueOf(orderInfo.getClassId())).get("classType")));
                     orderVo.setUsername(String.valueOf(userIdMap.get(orderInfo.getUserId())));
                     orderVo.setOperateName(String.valueOf(userIdMap.get(orderInfo.getOperateId())));
-                    if (classMap.get(orderInfo.getClassId()).get("classType") == GoodsEnum.PET.getCode()) {
+                    if (classMap.get(Long.valueOf(orderInfo.getClassId())).get("classType") == GoodsEnum.PET.getCode()) {
                         if (petNameMap.get(orderInfo.getGoodsId()) == null) {
                             petNameMap.put(orderInfo.getGoodsId(), petService.getById(orderInfo.getGoodsId()).getPetname());
                         }
                         orderVo.setGoodsName(petNameMap.get(orderInfo.getGoodsId()));
                     } else {
                         if (goodsNameMap.get(orderInfo.getGoodsId()) == null) {
-                            goodsNameMap.put(orderInfo.getGoodsId(), petService.getById(orderInfo.getGoodsId()).getPetname());
+                            goodsNameMap.put(orderInfo.getGoodsId(), commodityService.getById(orderInfo.getGoodsId()).getCommodity());
                         }
                         orderVo.setGoodsName(goodsNameMap.get(orderInfo.getGoodsId()));
                     }
@@ -337,10 +340,10 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
         order.setPreStatus(order.getCurStatus());
         order.setCurStatus(OrderStatusEnum.WAIT_SEND.getCode());
 
-        boolean save = save(order);
+        boolean update = updateById(order);
         // 删除redis的定时器
         redisTemplate.delete(ORDER_CANCEL_KEY_PREFIX + order.getId());
-        return save;
+        return update;
     }
 }
 

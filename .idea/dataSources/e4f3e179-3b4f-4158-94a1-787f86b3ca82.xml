@@ -807,7 +807,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <CollationName>latin1_swedish_ci</CollationName>
     </schema>
     <schema id="244" parent="1" name="tail_yy">
-      <LastIntrospectionLocalTimestamp>2025-01-19.09:07:28</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2025-02-16.13:37:05</LastIntrospectionLocalTimestamp>
       <CollationName>latin1_swedish_ci</CollationName>
     </schema>
     <user id="245" parent="1" name="root">
@@ -901,7 +901,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="262" parent="249" name="id">
-      <AutoIncrement>1</AutoIncrement>
+      <AutoIncrement>2</AutoIncrement>
       <Comment>id</Comment>
       <DasType>bigint(20)|0s</DasType>
       <NotNull>1</NotNull>
@@ -1022,7 +1022,6 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <column id="282" parent="250" name="operate_id">
       <Comment>操作者id（店员或者店长）</Comment>
       <DasType>int(11)|0s</DasType>
-      <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
     <column id="283" parent="250" name="address">
@@ -1251,7 +1250,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="321" parent="253" name="id">
-      <AutoIncrement>1</AutoIncrement>
+      <AutoIncrement>2</AutoIncrement>
       <Comment>id</Comment>
       <DasType>bigint(20)|0s</DasType>
       <NotNull>1</NotNull>

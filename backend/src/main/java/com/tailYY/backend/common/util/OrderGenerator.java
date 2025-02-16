@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  **/
 public class OrderGenerator {
 
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMddHH");
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
     private static final AtomicInteger sequence = new AtomicInteger(0);
     private static final int SEQUENCE_MAX = 999; // 序列号最大值，可根据需要调整
     private static final Object lock = new Object();
@@ -34,7 +34,7 @@ public class OrderGenerator {
         }
 
         // 返回组合后的订单号
-        return Long.valueOf(timestamp + userId + String.format("%03d", seq)); // 序列号占3位，不足补零
+        return Long.valueOf(timestamp + String.format("%02d", seq)); // 序列号占3位，不足补零
     }
 
     /**
