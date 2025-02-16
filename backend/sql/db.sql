@@ -134,7 +134,7 @@ create table if not exists order_info
     goods_id     int                                    not null comment '商品id（宠物或者商品）',
     class_id     int                                    not null comment '商品种类id',
     count        int                                    not null comment '商品数量',
-    operate_id   int                                    not null comment '操作者id（店员或者店长）',
+    operate_id   int                                    comment '操作者id（店员或者店长）',
     price        double                                 not null comment '价格',
     address      varchar(255)                           not null comment '订单地址',
     order_type   char(1)                                not null comment '订单类型 0线上 1线下',

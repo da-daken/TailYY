@@ -32,10 +32,10 @@ public class OrderController {
         if (request == null) {
             return ResultUtils.error(ErrorCode.PARAMS_ERROR);
         }
-        Assert.isNull(request.getUserId(), "userId is null");
-        Assert.isNull(request.getAddress(), "address is null");
-        Assert.isNull(request.getGoodsId(), "goodsId is null");
-        Assert.isNull(request.getClassId(), "classId is null");
+        Assert.notNull(request.getUserId(), "userId is null");
+        Assert.notNull(request.getAddress(), "address is null");
+        Assert.notNull(request.getGoodsId(), "goodsId is null");
+        Assert.notNull(request.getClassId(), "classId is null");
 
         return ResultUtils.success(orderService.createOnlineOrder(request));
     }
@@ -48,11 +48,11 @@ public class OrderController {
         if (request == null) {
             return ResultUtils.error(ErrorCode.PARAMS_ERROR);
         }
-        Assert.isNull(request.getOperateId(), "operateId is null");
-        Assert.isNull(request.getClassId(), "classId is null");
-        Assert.isNull(request.getGoodsId(), "goodsId is null");
-        Assert.isNull(request.getUserId(), "userId is null");
-        Assert.isNull(request.getAddress(), "address is null");
+        Assert.notNull(request.getOperateId(), "operateId is null");
+        Assert.notNull(request.getClassId(), "classId is null");
+        Assert.notNull(request.getGoodsId(), "goodsId is null");
+        Assert.notNull(request.getUserId(), "userId is null");
+        Assert.notNull(request.getAddress(), "address is null");
 
         return ResultUtils.success(orderService.createOfflineOrder(request));
     }
@@ -65,8 +65,8 @@ public class OrderController {
         if (request == null) {
             return ResultUtils.error(ErrorCode.PARAMS_ERROR);
         }
-        Assert.isNull(request.getUserId(), "userId is null");
-        Assert.isNull(request.getId(), "订单号 is null");
+        Assert.notNull(request.getUserId(), "userId is null");
+        Assert.notNull(request.getId(), "订单号 is null");
 
         return ResultUtils.success(orderService.payOrder(request));
     }

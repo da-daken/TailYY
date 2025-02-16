@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  **/
 public class OrderGenerator {
 
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMddHH");
     private static final AtomicInteger sequence = new AtomicInteger(0);
     private static final int SEQUENCE_MAX = 999; // 序列号最大值，可根据需要调整
     private static final Object lock = new Object();
