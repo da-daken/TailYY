@@ -23,7 +23,7 @@ public class CreateOfflineRequest implements Serializable {
     /**
      * 类别id
      */
-    private Integer classId;
+    private String classType;
 
     /**
      * 操作者id（店员或者店长）

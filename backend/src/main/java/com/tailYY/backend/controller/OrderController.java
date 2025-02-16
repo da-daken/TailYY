@@ -35,7 +35,7 @@ public class OrderController {
         Assert.notNull(request.getUserId(), "userId is null");
         Assert.notNull(request.getAddress(), "address is null");
         Assert.notNull(request.getGoodsId(), "goodsId is null");
-        Assert.notNull(request.getClassId(), "classId is null");
+        Assert.notNull(request.getClassType(), "classId is null");
 
         return ResultUtils.success(orderService.createOnlineOrder(request));
     }
@@ -49,7 +49,7 @@ public class OrderController {
             return ResultUtils.error(ErrorCode.PARAMS_ERROR);
         }
         Assert.notNull(request.getOperateId(), "operateId is null");
-        Assert.notNull(request.getClassId(), "classId is null");
+        Assert.notNull(request.getClassType(), "classId is null");
         Assert.notNull(request.getGoodsId(), "goodsId is null");
         Assert.notNull(request.getUserId(), "userId is null");
         Assert.notNull(request.getAddress(), "address is null");

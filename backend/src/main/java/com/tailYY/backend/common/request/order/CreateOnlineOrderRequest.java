@@ -22,7 +22,7 @@ public class CreateOnlineOrderRequest implements Serializable {
     /**
      * 类别id
      */
-    private Integer classId;
+    private String classType;
 
     /**
      * 订单地址

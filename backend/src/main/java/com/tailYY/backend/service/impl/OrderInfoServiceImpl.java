@@ -81,7 +81,7 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
         OrderInfo orderInfo = BeanCopyUtils.copyBean(request, OrderInfo.class);
         // 线上
         orderInfo.setOrderType(CommonConstants.ONLINE);
-        return createOrder(orderInfo);
+        return createOrder(orderInfo, request.getClassType());
     }
 
     @Override
@@ -90,7 +90,7 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
         OrderInfo orderInfo = BeanCopyUtils.copyBean(request, OrderInfo.class);
         // 线下
         orderInfo.setOrderType(CommonConstants.OFFLINE);
-        return createOrder(orderInfo);
+        return createOrder(orderInfo, request.getClassType());
     }
 
     @Override
@@ -277,9 +277,8 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
     }
 
     @Transactional
-    public Long createOrder(OrderInfo order) {
-        Class classDO = classService.getById(order.getClassId());
-        if (!StringUtils.equals(classDO.getClassType(), GoodsEnum.PET.getCode())) {
+    public Long createOrder(OrderInfo order, String classType) {
+        if (!StringUtils.equals(classType, GoodsEnum.PET.getCode())) {
             Commodity commodity = commodityService.getByIdLock(order.getGoodsId());
             if (CommonConstants.OFFLINE.equals(commodity.getStatus())) {
                 throw new BusinessException(ErrorCode.OPERATION_ERROR, "商品售卖状态异常");
@@ -297,6 +296,8 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
             order.setServiceTime(OrderGenerator.calculateExpirationTime(expireTime));
             // 订单价格
             order.setPrice(order.getCount() * commodity.getPrice());
+            // 类别id
+            order.setClassId(commodity.getClassId());
         } else {
             Pet pet = petService.getById(order.getGoodsId());
             if (CommonConstants.OFFLINE.equals(String.valueOf(pet.getStatus()))) {
@@ -306,6 +307,8 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
             pet.setStatus(1);
             petService.updateById(pet);
             order.setPrice(pet.getPrice());
+            // 类别id
+            order.setClassId(Integer.valueOf(String.valueOf(pet.getClassId())));
         }
 
         // 生成订单号
