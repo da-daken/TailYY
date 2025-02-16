@@ -117,7 +117,7 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
         comments.setIsBuyer(false);
         commentsList.add(comments);
         commodity.setComments(JsonUtils.convertJsonString(commentsList));
-        return save(commodity);
+        return updateById(commodity);
     }
 
     public void addOrderComments(Integer goodsId, Comments comments) {
