@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tailYY.backend.common.constants.ErrorCode;
 import com.tailYY.backend.common.exception.BusinessException;
 import com.tailYY.backend.mapper.UserMapper;
+import com.tailYY.backend.model.Do.UserDo;
 import com.tailYY.backend.model.User;
 import com.tailYY.backend.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +15,7 @@ import org.springframework.util.DigestUtils;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -123,7 +125,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public HashMap<Integer, String> getAllUserName(Set<Integer> userIds) {
+    public List<UserDo> getAllUserName(Set<Integer> userIds) {
         return userMapper.selectBatchIdsMap(userIds);
     }
 }

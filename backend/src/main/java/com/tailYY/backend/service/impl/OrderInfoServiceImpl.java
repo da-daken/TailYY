@@ -14,6 +14,7 @@ import com.tailYY.backend.common.util.OrderGenerator;
 import com.tailYY.backend.mapper.OrderInfoMapper;
 import com.tailYY.backend.model.Class;
 import com.tailYY.backend.model.Commodity;
+import com.tailYY.backend.model.Do.UserDo;
 import com.tailYY.backend.model.OrderInfo;
 import com.tailYY.backend.model.Pet;
 import com.tailYY.backend.model.Vo.OrderVo;
@@ -124,7 +125,11 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
         // 获取username
-        HashMap<Integer, String> userIdMap = userService.getAllUserName(userIds);
+        List<UserDo> userDoList = userService.getAllUserName(userIds);
+        HashMap<Long, String> userIdMap = new HashMap<>();
+        for (UserDo userDo : userDoList) {
+            userIdMap.put(userDo.getId(), userDo.getUsername());
+        }
 
         // 获取商品名称
         HashMap<Integer, String> goodsNameMap = new HashMap<>();
@@ -136,8 +141,8 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
                     OrderVo orderVo = BeanCopyUtils.copyBean(orderInfo, OrderVo.class);
                     orderVo.setClassName(String.valueOf(classMap.get(Long.valueOf(orderInfo.getClassId())).get("className")));
                     orderVo.setClassType(String.valueOf(classMap.get(Long.valueOf(orderInfo.getClassId())).get("classType")));
-                    orderVo.setUsername(String.valueOf(userIdMap.get(orderInfo.getUserId())));
-                    orderVo.setOperateName(String.valueOf(userIdMap.get(orderInfo.getOperateId())));
+                    orderVo.setUsername(String.valueOf(userIdMap.get(Long.valueOf(orderInfo.getUserId()))));
+                    orderVo.setOperateName(String.valueOf(userIdMap.get(Long.valueOf(orderInfo.getUserId()))));
                     if (StringUtils.equals(classMap.get(Long.valueOf(orderInfo.getClassId())).get("classType"), GoodsEnum.PET.getCode())) {
                         if (petNameMap.get(orderInfo.getGoodsId()) == null) {
                             petNameMap.put(orderInfo.getGoodsId(), petService.getById(orderInfo.getGoodsId()).getPetname());

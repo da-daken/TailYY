@@ -16,12 +16,17 @@
             <result property="isdelete" column="isDelete" jdbcType="TINYINT"/>
     </resultMap>
 
+    <resultMap id="ResultMap" type="com.tailYY.backend.model.Do.UserDo">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="username" column="userName" jdbcType="VARCHAR"/>
+    </resultMap>
+
     <sql id="Base_Column_List">
         id,userName,userAccount,
         avatar,userRole,password,
         createTime,updateTime,isDelete
     </sql>
-    <select id="selectBatchIdsMap" resultType="java.util.HashMap">
+    <select id="selectBatchIdsMap" resultMap="ResultMap">
         SELECT id, username FROM user WHERE id IN
         <foreach item='id' index='index' collection='userIds' open='(' separator=',' close=')'>
             #{id}

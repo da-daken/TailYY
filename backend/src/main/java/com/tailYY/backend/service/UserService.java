@@ -1,10 +1,12 @@
 package com.tailYY.backend.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.tailYY.backend.model.Do.UserDo;
 import com.tailYY.backend.model.User;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -28,5 +30,5 @@ public interface UserService extends IService<User> {
 
     boolean userLogout(HttpServletRequest request);
 
-    HashMap<Integer, String> getAllUserName(Set<Integer> userIds);
+    List<UserDo> getAllUserName(Set<Integer> userIds);
 }

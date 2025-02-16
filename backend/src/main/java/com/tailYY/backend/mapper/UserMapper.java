@@ -1,10 +1,12 @@
 package com.tailYY.backend.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.tailYY.backend.model.Do.UserDo;
 import com.tailYY.backend.model.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -16,7 +18,7 @@ import java.util.Set;
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
 
-    HashMap<Integer, String> selectBatchIdsMap(Set<Integer> userIds);
+    List<UserDo> selectBatchIdsMap(Set<Integer> userIds);
 }
 
 
