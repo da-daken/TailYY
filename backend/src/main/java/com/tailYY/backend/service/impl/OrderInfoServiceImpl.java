@@ -138,7 +138,7 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
                     orderVo.setClassType(String.valueOf(classMap.get(Long.valueOf(orderInfo.getClassId())).get("classType")));
                     orderVo.setUsername(String.valueOf(userIdMap.get(orderInfo.getUserId())));
                     orderVo.setOperateName(String.valueOf(userIdMap.get(orderInfo.getOperateId())));
-                    if (classMap.get(Long.valueOf(orderInfo.getClassId())).get("classType") == GoodsEnum.PET.getCode()) {
+                    if (StringUtils.equals(classMap.get(Long.valueOf(orderInfo.getClassId())).get("classType"), GoodsEnum.PET.getCode())) {
                         if (petNameMap.get(orderInfo.getGoodsId()) == null) {
                             petNameMap.put(orderInfo.getGoodsId(), petService.getById(orderInfo.getGoodsId()).getPetname());
                         }
