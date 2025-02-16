@@ -199,7 +199,7 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
         order.setComments(request.getComment());
         order.setPreStatus(order.getPreStatus());
         order.setCurStatus(OrderStatusEnum.SUCCESS.getCode());
-        save(order);
+        updateById(order);
         // 同步商品评论
         commodityService.addOrderComments(order.getGoodsId(), comments);
         return true;

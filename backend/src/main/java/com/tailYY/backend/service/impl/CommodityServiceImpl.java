@@ -131,7 +131,7 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
         List<Comments> commentsList = JsonUtils.convertJsonList(commodity.getComments(), Comments.class);
         commentsList.add(comments);
         commodity.setComments(JsonUtils.convertJsonString(commentsList));
-        save(commodity);
+        updateById(commodity);
     }
 
     @Override
