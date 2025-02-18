@@ -10,6 +10,7 @@ import com.tailYY.backend.common.util.ResultUtils;
 import com.tailYY.backend.model.User;
 import com.tailYY.backend.service.UserService;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -124,6 +125,9 @@ public class UserController {
         if (userUpdateRequest == null || userUpdateRequest.getId() == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
+        // 2. 加密
+        String encryptPassword = DigestUtils.md5DigestAsHex(("tail" + userUpdateRequest.getPassword()).getBytes());
+        userUpdateRequest.setPassword(encryptPassword);
         boolean result = userService.updateById(userUpdateRequest);
         return ResultUtils.success(result);
     }
