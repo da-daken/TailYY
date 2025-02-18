@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tailYY.backend.common.constants.ErrorCode;
 import com.tailYY.backend.common.exception.BusinessException;
+import com.tailYY.backend.common.request.user.UserPasswordRequest;
 import com.tailYY.backend.mapper.UserMapper;
 import com.tailYY.backend.model.Do.UserDo;
 import com.tailYY.backend.model.User;
@@ -127,6 +128,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public List<UserDo> getAllUserName(Set<Integer> userIds) {
         return userMapper.selectBatchIdsMap(userIds);
+    }
+
+    @Override
+    public Boolean updatePassword(UserPasswordRequest request) {
+        User user = getById(request.getUserid());
+        // 1. 判断老密码是否正确
+        String encryptPassword = DigestUtils.md5DigestAsHex((SALT + request.getOldPassword()).getBytes());
+        if (!encryptPassword.equals(user.getPassword())) {
+            throw new BusinessException(ErrorCode.OPERATION_ERROR, "验证密码错误");
+        }
+        // 2. 加密更新密码
+        if (request.getNewPassword().length() < 6) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户密码过短");
+        }
+        String newPassword = DigestUtils.md5DigestAsHex((SALT + request.getNewPassword()).getBytes());
+        user.setPassword(newPassword);
+        return updateById(user);
     }
 }
 

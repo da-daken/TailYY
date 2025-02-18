@@ -4,12 +4,16 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.tailYY.backend.common.constants.ErrorCode;
 import com.tailYY.backend.common.exception.BusinessException;
 import com.tailYY.backend.common.request.user.UserLoginRequest;
+import com.tailYY.backend.common.request.user.UserPasswordRequest;
 import com.tailYY.backend.common.request.user.UserRegisterRequest;
 import com.tailYY.backend.common.response.BaseResponse;
+import com.tailYY.backend.common.util.BeanCopyUtils;
 import com.tailYY.backend.common.util.ResultUtils;
 import com.tailYY.backend.model.User;
+import com.tailYY.backend.model.Vo.UserVo;
 import com.tailYY.backend.service.UserService;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.Assert;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -91,10 +95,10 @@ public class UserController {
      * @return
      */
     @GetMapping("/getUser")
-    public BaseResponse<List<User>> getUser(User user) {
+    public BaseResponse<List<UserVo>> getUser(User user) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>(user);
         List<User> userList = userService.list(queryWrapper);
-        return ResultUtils.success(userList);
+        return ResultUtils.success(BeanCopyUtils.copyBeanList(userList, UserVo.class));
     }
 
     /**
@@ -125,10 +129,22 @@ public class UserController {
         if (userUpdateRequest == null || userUpdateRequest.getId() == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        // 2. 加密
-        String encryptPassword = DigestUtils.md5DigestAsHex(("tail" + userUpdateRequest.getPassword()).getBytes());
-        userUpdateRequest.setPassword(encryptPassword);
         boolean result = userService.updateById(userUpdateRequest);
         return ResultUtils.success(result);
+    }
+
+    /**
+     * 修改密码
+     */
+    @PostMapping("/updatePassword")
+    public BaseResponse<Boolean> updatePassword(@RequestBody UserPasswordRequest request) {
+        if (request == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        Assert.notNull(request.getUserid(), "userid is null");
+        Assert.notNull(request.getOldPassword(), "oldPassword is null");
+        Assert.notNull(request.getNewPassword(), "newPassword is null");
+
+        return ResultUtils.success(userService.updatePassword(request));
     }
 }

@@ -1,6 +1,7 @@
 package com.tailYY.backend.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.tailYY.backend.common.request.user.UserPasswordRequest;
 import com.tailYY.backend.model.Do.UserDo;
 import com.tailYY.backend.model.User;
 
@@ -31,4 +32,6 @@ public interface UserService extends IService<User> {
     boolean userLogout(HttpServletRequest request);
 
     List<UserDo> getAllUserName(Set<Integer> userIds);
+
+    Boolean updatePassword(UserPasswordRequest request);
 }
