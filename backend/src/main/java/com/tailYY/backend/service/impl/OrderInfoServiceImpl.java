@@ -276,6 +276,20 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
         }
         order.setPreStatus(order.getCurStatus());
         order.setCurStatus(OrderStatusEnum.CANCEL.getCode());
+        // 取消订单，回滚商品状态+库存
+        Class aClass = classService.getById(Long.valueOf(order.getClassId()));
+        if (GoodsEnum.PET.getCode().equals(aClass.getClassType())) {
+            // 宠物只修改一下状态
+            Pet pet = petService.getById(Long.valueOf(order.getGoodsId()));
+            // 在售
+            pet.setStatus(0);
+        } else if (GoodsEnum.GOODS.getCode().equals(aClass.getClassType())) {
+            // 宠物用品需要修改库存
+            Commodity commodity = commodityService.getById(Long.valueOf(order.getGoodsId()));
+            Integer newStock = commodity.getStockCount() + order.getCount();
+            commodity.setStockCount(newStock);
+            commodityService.updateById(commodity);
+        }
         return updateById(order);
     }
 

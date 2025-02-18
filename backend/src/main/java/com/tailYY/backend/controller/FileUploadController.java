@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
 
 /**
  * @author daken 2025/2/9
@@ -36,14 +39,23 @@ public class FileUploadController {
                 dir.mkdirs();
             }
 
+
             // 获取文件名并构建目标路径
             String fileName = file.getOriginalFilename();
-            Path path = Paths.get(UPLOAD_DIR + fileName);
+            // 获取文件名的前缀和后缀
+            int dotIndex = fileName.lastIndexOf('.');
+            String prefix = fileName.substring(0, dotIndex);
+            String suffix = fileName.substring(dotIndex);
+
+            // 生成时间戳作为后缀
+            String timeStamp = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
+            String newFileName = prefix + "_" + timeStamp + suffix;
+            Path path = Paths.get(UPLOAD_DIR + newFileName);
 
             // 将文件保存到指定位置
             Files.copy(file.getInputStream(), path);
 
-            return ResultUtils.success(UPLOAD_DIR + fileName);
+            return ResultUtils.success(UPLOAD_DIR + newFileName);
         } catch (IOException e) {
             e.printStackTrace();
         }
