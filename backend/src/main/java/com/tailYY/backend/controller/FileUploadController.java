@@ -17,14 +17,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Random;
 
 /**
  * @author daken 2025/2/9
  **/
 @RestController
 public class FileUploadController {
-    private static final String UPLOAD_DIR = "backend/photos/";
+    private static final String UPLOAD_DIR = "/static/";
 
     @PostMapping("/uploadPhoto")
     public BaseResponse<String> uploadPhoto(@RequestParam("photo") MultipartFile file) {
