@@ -23,7 +23,7 @@ import java.util.Date;
  **/
 @RestController
 public class FileUploadController {
-    private static final String UPLOAD_DIR = "/static/";
+    private static final String UPLOAD_DIR = "backend/src/main/resources/static/";
 
     @PostMapping("/uploadPhoto")
     public BaseResponse<String> uploadPhoto(@RequestParam("photo") MultipartFile file) {
