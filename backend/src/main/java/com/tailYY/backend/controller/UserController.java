@@ -141,7 +141,7 @@ public class UserController {
         if (request == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        Assert.notNull(request.getUserid(), "userid is null");
+                                      Assert.notNull(request.getUserid(), "userid is null");
         Assert.notNull(request.getOldPassword(), "oldPassword is null");
         Assert.notNull(request.getNewPassword(), "newPassword is null");
 

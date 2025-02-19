@@ -16,6 +16,10 @@ server:
       # Tomcat启动初始化的线程数，默认值10
       min-spare: 100080
 spring:
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/resource/static
   servlet:
     multipart:
       max-file-size: 5MB

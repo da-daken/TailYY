@@ -3,6 +3,7 @@ package com.tailYY.backend.controller;
 import com.tailYY.backend.common.constants.ErrorCode;
 import com.tailYY.backend.common.exception.BusinessException;
 import com.tailYY.backend.common.response.BaseResponse;
+import com.tailYY.backend.common.util.GitHubFileUtil;
 import com.tailYY.backend.common.util.ResultUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,36 +31,38 @@ public class FileUploadController {
         if (file.isEmpty()) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
+        String uploading = GitHubFileUtil.uploading(file.getOriginalFilename(), "tail", "上传图片");
 
-        try {
-            // 确保保存目录存在
-            File dir = new File(UPLOAD_DIR);
-            if (!dir.exists()) {
-                dir.mkdirs();
-            }
+        return ResultUtils.success(uploading);
+//        try {
+//            // 确保保存目录存在
+//            File dir = new File(UPLOAD_DIR);
+//            if (!dir.exists()) {
+//                dir.mkdirs();
+//            }
+//
+//
+//            // 获取文件名并构建目标路径
+//            String fileName = file.getOriginalFilename();
+//            // 获取文件名的前缀和后缀
+//            int dotIndex = fileName.lastIndexOf('.');
+//            String prefix = fileName.substring(0, dotIndex);
+//            String suffix = fileName.substring(dotIndex);
+//
+//            // 生成时间戳作为后缀
+//            String timeStamp = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
+//            String newFileName = prefix + "_" + timeStamp + suffix;
+//            Path path = Paths.get(UPLOAD_DIR + newFileName);
+//
+//            // 将文件保存到指定位置
+//            Files.copy(file.getInputStream(), path);
+//
+//            return ResultUtils.success(UPLOAD_DIR + newFileName);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
-
-            // 获取文件名并构建目标路径
-            String fileName = file.getOriginalFilename();
-            // 获取文件名的前缀和后缀
-            int dotIndex = fileName.lastIndexOf('.');
-            String prefix = fileName.substring(0, dotIndex);
-            String suffix = fileName.substring(dotIndex);
-
-            // 生成时间戳作为后缀
-            String timeStamp = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
-            String newFileName = prefix + "_" + timeStamp + suffix;
-            Path path = Paths.get(UPLOAD_DIR + newFileName);
-
-            // 将文件保存到指定位置
-            Files.copy(file.getInputStream(), path);
-
-            return ResultUtils.success(UPLOAD_DIR + newFileName);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return ResultUtils.success("上传失败");
+//        return ResultUtils.success("上传失败");
     }
 
     @GetMapping("/test")
