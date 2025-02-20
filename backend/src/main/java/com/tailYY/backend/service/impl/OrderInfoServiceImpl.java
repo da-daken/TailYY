@@ -219,7 +219,7 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
         if (order == null) {
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "订单不存在");
         }
-        if (Integer.valueOf(order.getCurStatus()) < 4) {
+        if (Integer.valueOf(order.getCurStatus()) >= 4) {
             throw new BusinessException(ErrorCode.OPERATION_ERROR, "订单状态不允许退换货");
         }
 
