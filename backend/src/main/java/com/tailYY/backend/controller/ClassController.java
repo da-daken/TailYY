@@ -40,10 +40,11 @@ public class ClassController {
      */
     @PostMapping("/deleteClass")
     public BaseResponse<Boolean> deleteClass(@RequestBody Class classId) {
-        if (classId == null || classId == null) {
+        if (classId == null || classId.getId() == null) {
             return ResultUtils.error(ErrorCode.PARAMS_ERROR);
         }
-        return ResultUtils.success(classService.removeById(classId.getId()));
+
+        return ResultUtils.success(classService.removeAndJudge(classId.getId()));
     }
 
     /**

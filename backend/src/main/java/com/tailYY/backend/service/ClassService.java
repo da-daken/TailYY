@@ -17,4 +17,6 @@ public interface ClassService extends IService<Class> {
     HashMap<Long, String> getAllClassName(Set<Integer> classIds);
 
     List<Class> getAllClass(Set<Integer> classIds);
+
+    Boolean removeAndJudge(Long id);
 }
