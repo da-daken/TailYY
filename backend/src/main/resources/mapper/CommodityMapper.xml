@@ -32,4 +32,7 @@
     <select id="getByIdLock" resultType="com.tailYY.backend.model.Commodity">
         select * from commodity where id = #{goodsId} for update
     </select>
+    <select id="getList" resultType="com.tailYY.backend.model.Commodity">
+        select * from commodity where class_id = #{id}
+    </select>
 </mapper>

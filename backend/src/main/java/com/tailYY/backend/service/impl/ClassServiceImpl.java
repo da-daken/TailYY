@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tailYY.backend.common.constants.ErrorCode;
 import com.tailYY.backend.common.exception.BusinessException;
 import com.tailYY.backend.mapper.ClassMapper;
+import com.tailYY.backend.mapper.CommodityMapper;
 import com.tailYY.backend.model.Class;
 import com.tailYY.backend.model.Commodity;
 import com.tailYY.backend.model.Vo.CommodityVo;
@@ -27,8 +28,9 @@ public class ClassServiceImpl extends ServiceImpl<ClassMapper, Class> implements
     @Resource
     private ClassMapper classMapper;
 
+
     @Resource
-    private CommodityService commodityService;
+    private CommodityMapper mapper;
 
     @Override
     public HashMap<Long, String> getAllClassName(Set<Integer> classIds) {
@@ -44,8 +46,8 @@ public class ClassServiceImpl extends ServiceImpl<ClassMapper, Class> implements
     public Boolean removeAndJudge(Long id) {
         Commodity commodity = new Commodity();
         commodity.setClassId(Integer.valueOf(String.valueOf(id)));
-        List<CommodityVo> andNotify = commodityService.getAndNotify(commodity);
-        if (!andNotify.isEmpty()) {
+        List<Commodity> list = mapper.getList(id);
+        if (!list.isEmpty()) {
             throw new BusinessException(ErrorCode.OPERATION_ERROR, "有绑定宠物或者其他商品信息，请删除其他绑定的信息后在进行操作");
         }
         return removeById(id);
