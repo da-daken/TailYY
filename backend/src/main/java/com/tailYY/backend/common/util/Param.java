@@ -4,7 +4,7 @@ package com.tailYY.backend.common.util;
  * @author daken 2025/2/19
  **/
 public class Param {
-    public static final String branch = "main";
+    public static final String branch = "master";
 
     public static final String name = "daken";
      public static final String email = "dakengg@qq.com";

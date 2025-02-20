@@ -8,6 +8,7 @@ import com.tailYY.backend.common.request.user.UserPasswordRequest;
 import com.tailYY.backend.common.request.user.UserRegisterRequest;
 import com.tailYY.backend.common.response.BaseResponse;
 import com.tailYY.backend.common.util.BeanCopyUtils;
+import com.tailYY.backend.common.util.FileUtils;
 import com.tailYY.backend.common.util.ResultUtils;
 import com.tailYY.backend.model.User;
 import com.tailYY.backend.model.Vo.UserVo;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author daken 2025/1/11
@@ -98,7 +100,12 @@ public class UserController {
     public BaseResponse<List<UserVo>> getUser(User user) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>(user);
         List<User> userList = userService.list(queryWrapper);
-        return ResultUtils.success(BeanCopyUtils.copyBeanList(userList, UserVo.class));
+        List<UserVo> userVoList = userList.stream().map(user1 -> {
+            UserVo userVo = BeanCopyUtils.copyBean(user1, UserVo.class);
+            userVo.setAvatar(FileUtils.convertFileToBase64(userVo.getAvatar()));
+            return userVo;
+        }).collect(Collectors.toList());
+        return ResultUtils.success(userVoList);
     }
 
     /**

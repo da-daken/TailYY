@@ -2,7 +2,6 @@ package com.tailYY.backend.model.Vo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.tailYY.backend.model.json.Comments;
 import lombok.Data;
 
 import java.io.Serializable;

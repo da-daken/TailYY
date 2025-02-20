@@ -19,7 +19,8 @@ spring:
   devtools:
     restart:
       enabled: true
-      additional-paths: src/main/resource/static
+      additional-paths: backend/src/main/resources/static/
+
   servlet:
     multipart:
       max-file-size: 5MB
@@ -44,6 +45,14 @@ spring:
     port: 6379
     host: localhost
     database: 0
+  web:
+    resources:
+      cache:
+        period: 0
+        cachecontrol:
+          no-cache: true
+          no-store: true
+          must-revalidate: true
 
 order:
   expire:

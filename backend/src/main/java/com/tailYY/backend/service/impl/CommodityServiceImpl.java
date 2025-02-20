@@ -9,6 +9,7 @@ import com.tailYY.backend.common.exception.BusinessException;
 import com.tailYY.backend.common.request.commodity.CommentRequest;
 import com.tailYY.backend.common.request.commodity.CommodityRequest;
 import com.tailYY.backend.common.util.BeanCopyUtils;
+import com.tailYY.backend.common.util.FileUtils;
 import com.tailYY.backend.common.util.JsonUtils;
 import com.tailYY.backend.mapper.CommodityMapper;
 import com.tailYY.backend.model.Class;
@@ -67,6 +68,7 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
         }
         return commodityList.stream().map(commodity1 -> {
             CommodityVo commodityVo = BeanCopyUtils.copyBean(commodity1, CommodityVo.class);
+            commodityVo.setPic(FileUtils.convertFileToBase64(commodity1.getPic()));
             List<Comments> commentsList = JsonUtils.convertJsonList(commodity1.getComments(), Comments.class);
             if (commentsList !=null && !commentsList.isEmpty()) {
                 List<CommentVo> commentVoList = commentsList.stream()

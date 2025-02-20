@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tailYY.backend.common.request.pet.PetEditRequest;
 import com.tailYY.backend.common.request.pet.PetQueryRequest;
 import com.tailYY.backend.common.util.BeanCopyUtils;
+import com.tailYY.backend.common.util.FileUtils;
 import com.tailYY.backend.common.util.JsonUtils;
 import com.tailYY.backend.mapper.PetMapper;
 import com.tailYY.backend.model.Class;
@@ -49,6 +50,7 @@ public class PetServiceImpl extends ServiceImpl<PetMapper, Pet> implements PetSe
         List<Pet> pets = list(queryWrapper);
         return pets.stream().map(pet1 -> {
             PetVo petVo = BeanCopyUtils.copyBean(pet1, PetVo.class);
+            petVo.setPic(FileUtils.convertFileToBase64(pet1.getPic()));
             petVo.setBodyRecord(JsonUtils.convertJsonList(pet1.getBodyRecord(), BodyRecord.class));
             petVo.setServiceRecord(JsonUtils.convertJsonList(pet1.getServiceRecord(), ServiceRecord.class));
             Class byId = classService.getById(pet1.getClassId());
@@ -58,7 +60,3 @@ public class PetServiceImpl extends ServiceImpl<PetMapper, Pet> implements PetSe
         }).collect(Collectors.toList());
     }
 }
-
-
-
-
