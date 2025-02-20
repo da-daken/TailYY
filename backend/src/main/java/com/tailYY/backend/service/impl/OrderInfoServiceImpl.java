@@ -139,8 +139,11 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
         List<OrderVo> orderVoList = orderInfos.stream()
                 .map(orderInfo -> {
                     OrderVo orderVo = BeanCopyUtils.copyBean(orderInfo, OrderVo.class);
-                    orderVo.setClassName(String.valueOf(classMap.get(Long.valueOf(orderInfo.getClassId())).get("className")));
-                    orderVo.setClassType(String.valueOf(classMap.get(Long.valueOf(orderInfo.getClassId())).get("classType")));
+                    HashMap<String, String> map = classMap.get(Long.valueOf(orderInfo.getClassId()));
+                    if (map != null) {
+                        orderVo.setClassName(String.valueOf(map.get("className")));
+                        orderVo.setClassType(String.valueOf(map.get("classType")));
+                    }
                     orderVo.setUsername(String.valueOf(userIdMap.get(Long.valueOf(orderInfo.getUserId()))));
                     orderVo.setOperateName(String.valueOf(userIdMap.get(Long.valueOf(orderInfo.getUserId()))));
                     if (StringUtils.equals(classMap.get(Long.valueOf(orderInfo.getClassId())).get("classType"), GoodsEnum.PET.getCode())) {
