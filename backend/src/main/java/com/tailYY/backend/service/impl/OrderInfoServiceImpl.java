@@ -249,10 +249,21 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
         if (!order.getCurStatus().equals(OrderStatusEnum.APPLYING.getCode())) {
             throw new BusinessException(ErrorCode.OPERATION_ERROR, "当前订单状态未在申请中");
         }
+
         // 同意申请
         if (request.getApply()) {
             if (order.getCancelOrRefund().equals("0")) {
                 order.setCurStatus(OrderStatusEnum.CANCEL.getCode());
+                Class byId = classService.getById(Long.valueOf(order.getClassId()));
+                if (byId.getClassType().equals(GoodsEnum.PET.getCode())) {
+                    Pet pet = petService.getById(Long.valueOf(order.getGoodsId()));
+                    pet.setStatus(0);
+                    petService.updateById(pet);
+                } else if (byId.getClassType().equals(GoodsEnum.GOODS.getCode())){
+                    Commodity commodity = commodityService.getById(Long.valueOf(order.getGoodsId()));
+                    commodity.setStockCount(commodity.getStockCount() + order.getCount());
+                    commodityService.updateById(commodity);
+                }
             } else if (order.getCancelOrRefund().equals("1")) {
                 order.setCurStatus(OrderStatusEnum.WAIT_SEND.getCode());
             }
