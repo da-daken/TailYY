@@ -15,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -58,7 +59,8 @@ public class PetController {
         PetVo petVo = petInfo.get(0);
         if (request.getBodyRecord() != null) {
             List<BodyRecord> bodyRecord = petVo.getBodyRecord();
-            if (bodyRecord!= null && bodyRecord.isEmpty()) {
+            if (bodyRecord == null && bodyRecord.isEmpty()) {
+                bodyRecord = new ArrayList<>();
                 request.getBodyRecord().setBodyId(1L);
             } else {
                 request.getBodyRecord().setBodyId(bodyRecord.get(bodyRecord.size() - 1).getBodyId() + 1);
@@ -67,7 +69,8 @@ public class PetController {
             petVo.setBodyRecord(bodyRecord);
         } else if (request.getServiceRecord() != null) {
             List<ServiceRecord> serviceRecord = petVo.getServiceRecord();
-            if (serviceRecord!= null && serviceRecord.isEmpty()) {
+            if (serviceRecord == null && serviceRecord.isEmpty()) {
+                serviceRecord = new ArrayList<>();
                 request.getServiceRecord().setServiceId(1L);
             } else {
                 request.getServiceRecord().setServiceId(serviceRecord.get(serviceRecord.size() - 1).getServiceId() + 1);

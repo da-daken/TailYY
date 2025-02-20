@@ -19,4 +19,6 @@ public interface ClassService extends IService<Class> {
     List<Class> getAllClass(Set<Integer> classIds);
 
     Boolean removeAndJudge(Long id);
+
+    Class getClassById(Long id);
 }

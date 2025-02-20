@@ -24,6 +24,8 @@ public interface ClassMapper extends BaseMapper<Class> {
 
     @MapKey("id")
     List<Class> selectBatchIdsClassMap(Set<Integer> classIds);
+
+    Class getClassById(Long id);
 }
 
 

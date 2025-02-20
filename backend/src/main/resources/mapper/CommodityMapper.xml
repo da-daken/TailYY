@@ -33,6 +33,6 @@
         select * from commodity where id = #{goodsId} for update
     </select>
     <select id="getList" resultType="com.tailYY.backend.model.Commodity">
-        select * from commodity where class_id = #{id}
+        select * from commodity where class_id = #{id} and isDelete = 0
     </select>
 </mapper>

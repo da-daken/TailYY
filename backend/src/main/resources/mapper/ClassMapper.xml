@@ -25,9 +25,12 @@
         </foreach>
     </select>
     <select id="selectBatchIdsClassMap" resultMap="BaseResultMap">
-        SELECT id, class_type ,class_name FROM class WHERE id IN
+        SELECT id, class_type ,class_name FROM class WHERE (isDelete = 0 or isDelete = 1) and id IN
         <foreach item='id' index='index' collection='classIds' open='(' separator=',' close=')'>
             #{id}
         </foreach>
+    </select>
+    <select id="getClassById" resultType="com.tailYY.backend.model.Class">
+        select * from class where id = #{id} and (isDelete = 0 or isDelete = 1)
     </select>
 </mapper>

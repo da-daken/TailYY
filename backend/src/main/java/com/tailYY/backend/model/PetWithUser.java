@@ -2,6 +2,7 @@ package com.tailYY.backend.model;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
@@ -42,6 +43,7 @@ public class PetWithUser implements Serializable {
     /**
      * 是否删除
      */
+    @TableLogic
     private Integer isdelete;
 
     @TableField(exist = false)

@@ -52,6 +52,11 @@ public class ClassServiceImpl extends ServiceImpl<ClassMapper, Class> implements
         }
         return removeById(id);
     }
+
+    @Override
+    public Class getClassById(Long id) {
+        return classMapper.getClassById(id);
+    }
 }
 
 

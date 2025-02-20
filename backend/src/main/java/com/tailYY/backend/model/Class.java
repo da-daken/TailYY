@@ -1,9 +1,7 @@
 package com.tailYY.backend.model;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -48,6 +46,7 @@ public class Class implements Serializable {
     /**
      * 是否删除
      */
+    @TableLogic
     private Integer isdelete;
 
     @TableField(exist = false)

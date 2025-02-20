@@ -208,7 +208,7 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
         order.setPreStatus(order.getPreStatus());
         order.setCurStatus(OrderStatusEnum.SUCCESS.getCode());
         updateById(order);
-        Class aClass = classService.getById(Long.valueOf(order.getClassId()));
+        Class aClass = classService.getClassById(Long.valueOf(order.getClassId()));
         if (aClass != null && !GoodsEnum.PET.getCode().equals(aClass.getClassType())) {
             // 同步商品评论
             commodityService.addOrderComments(order.getGoodsId(), comments);
@@ -257,7 +257,7 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
         if (request.getApply()) {
             if (order.getCancelOrRefund().equals("0")) {
                 order.setCurStatus(OrderStatusEnum.CANCEL.getCode());
-                Class byId = classService.getById(Long.valueOf(order.getClassId()));
+                Class byId = classService.getClassById(Long.valueOf(order.getClassId()));
                 if (byId.getClassType().equals(GoodsEnum.PET.getCode())) {
                     Pet pet = petService.getById(Long.valueOf(order.getGoodsId()));
                     pet.setStatus(0);
@@ -291,7 +291,7 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
         order.setPreStatus(order.getCurStatus());
         order.setCurStatus(OrderStatusEnum.CANCEL.getCode());
         // 取消订单，回滚商品状态+库存
-        Class aClass = classService.getById(Long.valueOf(order.getClassId()));
+        Class aClass = classService.getClassById(Long.valueOf(order.getClassId()));
         if (GoodsEnum.PET.getCode().equals(aClass.getClassType())) {
             // 宠物只修改一下状态
             Pet pet = petService.getById(Long.valueOf(order.getGoodsId()));
