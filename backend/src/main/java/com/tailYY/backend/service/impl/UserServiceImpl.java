@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tailYY.backend.common.constants.ErrorCode;
 import com.tailYY.backend.common.exception.BusinessException;
 import com.tailYY.backend.common.request.user.UserPasswordRequest;
+import com.tailYY.backend.common.util.FileUtils;
 import com.tailYY.backend.mapper.UserMapper;
 import com.tailYY.backend.model.Do.UserDo;
 import com.tailYY.backend.model.User;
@@ -95,6 +96,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         // 3. 记录用户的登录态
         request.getSession().setAttribute(USER_LOGIN_STATE, user);
+        user.setAvatar(FileUtils.convertFileToBase64(user.getAvatar()));
         return user;
     }
 
