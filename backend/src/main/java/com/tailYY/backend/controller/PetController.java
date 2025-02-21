@@ -59,7 +59,7 @@ public class PetController {
         PetVo petVo = petInfo.get(0);
         if (request.getBodyRecord() != null) {
             List<BodyRecord> bodyRecord = petVo.getBodyRecord();
-            if (bodyRecord == null && bodyRecord.isEmpty()) {
+            if (bodyRecord == null || bodyRecord.isEmpty()) {
                 bodyRecord = new ArrayList<>();
                 request.getBodyRecord().setBodyId(1L);
             } else {
@@ -69,7 +69,7 @@ public class PetController {
             petVo.setBodyRecord(bodyRecord);
         } else if (request.getServiceRecord() != null) {
             List<ServiceRecord> serviceRecord = petVo.getServiceRecord();
-            if (serviceRecord == null && serviceRecord.isEmpty()) {
+            if (serviceRecord == null || serviceRecord.isEmpty()) {
                 serviceRecord = new ArrayList<>();
                 request.getServiceRecord().setServiceId(1L);
             } else {
