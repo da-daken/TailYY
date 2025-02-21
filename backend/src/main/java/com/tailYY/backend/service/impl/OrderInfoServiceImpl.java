@@ -297,6 +297,7 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
             Pet pet = petService.getById(Long.valueOf(order.getGoodsId()));
             // 在售
             pet.setStatus(0);
+            petService.updateById(pet);
         } else if (GoodsEnum.GOODS.getCode().equals(aClass.getClassType())) {
             // 宠物用品需要修改库存
             Commodity commodity = commodityService.getById(Long.valueOf(order.getGoodsId()));
