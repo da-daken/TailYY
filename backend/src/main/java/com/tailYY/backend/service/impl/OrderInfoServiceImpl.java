@@ -217,7 +217,7 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
     }
 
     @Override
-    public Boolean refundOrder(ApplyRequest request) throws ParseException {
+    public Boolean refundOrder(ApplyRequest request) {
         OrderInfo order = getById(request.getOrderId());
         if (order == null) {
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "订单不存在");
@@ -234,6 +234,9 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
         // 获取当前时间
         Date now = new Date();
         // 判断当前时间是否在特定时间之前
+        if (order.getServiceTime() == null) {
+            throw new BusinessException(ErrorCode.OPERATION_ERROR, "宠物不能退换货");
+        }
         if (!now.before(order.getServiceTime())) {
             throw new BusinessException(ErrorCode.OPERATION_ERROR, "当前订单售后时间已经过期，不允许退货");
         }

@@ -81,6 +81,11 @@ public class OrderVo implements Serializable {
     private Date serviceTime;
 
     /**
+     * 退换货状态
+     */
+    private String cancelOrRefund;
+
+    /**
      * 下单时间
      */
     private Date createtime;
