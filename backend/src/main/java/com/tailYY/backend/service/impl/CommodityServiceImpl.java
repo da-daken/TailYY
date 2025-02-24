@@ -131,6 +131,9 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "商品不存在");
         }
         List<Comments> commentsList = JsonUtils.convertJsonList(commodity.getComments(), Comments.class);
+        if (commentsList == null) {
+            commentsList = new ArrayList<>();
+        }
         commentsList.add(comments);
         commodity.setComments(JsonUtils.convertJsonString(commentsList));
         updateById(commodity);

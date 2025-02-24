@@ -207,12 +207,12 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
         order.setComments(request.getComment());
         order.setPreStatus(order.getPreStatus());
         order.setCurStatus(OrderStatusEnum.SUCCESS.getCode());
-        updateById(order);
         Class aClass = classService.getClassById(Long.valueOf(order.getClassId()));
         if (aClass != null && !GoodsEnum.PET.getCode().equals(aClass.getClassType())) {
             // 同步商品评论
             commodityService.addOrderComments(order.getGoodsId(), comments);
         }
+        updateById(order);
         return true;
     }
 
